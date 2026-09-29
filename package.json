@@ -8,10 +8,19 @@
     "generate:ext": "bun scripts/generate-extensions-corpus.ts",
     "test": "bun test",
     "check": "bunx tsc --noEmit",
-    "build": "bunx tsc --noEmit"
+    "build": "bunx tsc --noEmit",
+    "dev": "next dev"
   },
   "devDependencies": {
-    "typescript": "^5.6.0",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "next": "^16.3.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }
