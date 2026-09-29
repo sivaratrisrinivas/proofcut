@@ -44,7 +44,14 @@ export interface PreflightResult {
   warnings: string[];
   measurements: Measurements;
   productId: string;
+  sources?: MeasurementSources;
 }
+
+export type MeasurementSource = "content" | "sidecar";
+
+export type MeasurementSources = Partial<
+  Record<"ppi" | "dims" | "bleed" | "cutline" | "whiteInk" | "text" | "color" | "transparency", MeasurementSource>
+>;
 
 const EPS = 1e-9;
 

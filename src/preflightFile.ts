@@ -1,10 +1,17 @@
-import { readPngDims } from "./png";
 import { hasCutContourSpot, hasWhiteInkSpot } from "./pdf";
-import { preflight, type OrderedSize, type PreflightExtras, type PreflightResult } from "./preflight";
+import {
+  computePpi,
+  preflight,
+  type MeasurementSources,
+  type OrderedSize,
+  type PreflightExtras,
+  type PreflightResult,
+} from "./preflight";
+import { measurePngContent } from "./preflightContent";
 import { getSpec } from "./specs";
 
 export interface Sidecar {
-  bleedWidthIn: number;
+  bleedWidthIn?: number;
   cutlinePresent?: boolean;
   whiteInkPresent?: boolean | null;
   minTextPt?: number | null;
@@ -25,10 +32,11 @@ export async function readSidecar(filePath: string): Promise<Sidecar> {
     throw new Error(`missing sidecar: ${sidecarPath}`);
   }
   const json = (await f.json()) as Partial<Sidecar>;
-  if (!isRecord(json) || typeof json.bleedWidthIn !== "number") {
+  if (!isRecord(json)) {
     throw new Error(`bad sidecar: ${sidecarPath}`);
   }
-  const out: Sidecar = { bleedWidthIn: json.bleedWidthIn };
+  const out: Sidecar = {};
+  if (typeof json.bleedWidthIn === "number") out.bleedWidthIn = json.bleedWidthIn;
   if (typeof json.cutlinePresent === "boolean") out.cutlinePresent = json.cutlinePresent;
   if (typeof json.whiteInkPresent === "boolean" || json.whiteInkPresent === null) {
     out.whiteInkPresent = json.whiteInkPresent;
@@ -60,6 +68,9 @@ export async function preflightFile(
     if (typeof sidecar.pixelWidth !== "number" || typeof sidecar.pixelHeight !== "number") {
       throw new Error(`pdf sidecar missing pixelWidth/pixelHeight: ${filePath}.sidecar.json`);
     }
+    if (typeof sidecar.bleedWidthIn !== "number") {
+      throw new Error(`pdf sidecar missing bleedWidthIn: ${filePath}.sidecar.json`);
+    }
     const extras: PreflightExtras = {
       bleedWidthIn: sidecar.bleedWidthIn,
       cutlinePresent: hasCutContourSpot(buf),
@@ -68,18 +79,48 @@ export async function preflightFile(
       colorMode: sidecar.colorMode ?? null,
       hasTransparency: sidecar.hasTransparency ?? null,
     };
-    return preflight(sidecar.pixelWidth, sidecar.pixelHeight, ordered, extras, spec);
+    const result = preflight(sidecar.pixelWidth, sidecar.pixelHeight, ordered, extras, spec);
+    const sources: MeasurementSources = {
+      ppi: "sidecar",
+      dims: "sidecar",
+      bleed: "sidecar",
+      cutline: "content",
+      whiteInk: "content",
+      text: "sidecar",
+      color: "sidecar",
+      transparency: "sidecar",
+    };
+    return { ...result, sources };
   }
 
   const bytes = await Bun.file(filePath).arrayBuffer();
-  const { width, height } = readPngDims(Buffer.from(bytes));
+  const content = measurePngContent(Buffer.from(bytes));
+  const ppi = computePpi(content.pixelWidth, content.pixelHeight, ordered);
+  // Declared beats measured: legacy L1 sidecars carry injected bleed faults and
+  // the L1 gate is frozen; L2 sidecars declare no bleed, so pixels rule there.
+  const bleedWidthIn =
+    sidecar.bleedWidthIn ??
+    Math.max(0, spec.bleedRequiredIn - content.edgeDepthPx / ppi);
+  const colorMode = sidecar.colorMode ?? (content.blackPixelCount > 0 ? "RGB" : null);
   const extras: PreflightExtras = {
-    bleedWidthIn: sidecar.bleedWidthIn,
+    bleedWidthIn,
     cutlinePresent: sidecar.cutlinePresent ?? false,
     whiteInkPresent: sidecar.whiteInkPresent ?? null,
     minTextPt: sidecar.minTextPt ?? null,
-    colorMode: sidecar.colorMode ?? null,
-    hasTransparency: sidecar.hasTransparency ?? null,
+    colorMode,
+    hasTransparency: sidecar.hasTransparency ?? content.hasTransparency,
   };
-  return preflight(width, height, ordered, extras, spec);
+  const result = preflight(content.pixelWidth, content.pixelHeight, ordered, extras, spec);
+  const declared = (v: unknown): "content" | "sidecar" => (v != null ? "sidecar" : "content");
+  const sources: MeasurementSources = {
+    ppi: "content",
+    dims: "content",
+    bleed: declared(sidecar.bleedWidthIn),
+    cutline: "sidecar",
+    whiteInk: "sidecar",
+    text: "sidecar",
+    color: declared(sidecar.colorMode),
+    transparency: declared(sidecar.hasTransparency),
+  };
+  return { ...result, sources };
 }
