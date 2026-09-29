@@ -98,10 +98,9 @@ production track.
 Status: live at **https://proofcut.vercel.app** (production deploy on Vercel
 per ADR-0001, zero-config Next.js). It serves the full demo: single demo login
 (`Continue as demo-artist`, no password, per `src/demoAuth.ts`), the
-script-driven 3-minute walkthrough (`#walkthrough` section plus
-`docs/demo-script.md`, 7 beats totalling 180s per `src/demoWalkthrough.ts`),
-and the upload to overlays to before-and-after to sliders to production-path
-flow. To redeploy after changes, run `vercel --prod` from the repo root.
+one-job-at-a-time review loop (Up next to Decide, verdict-routed, over
+`src/loop.ts`), a stepped New-proof flow, and read-only Insights. Redeploy
+with `vercel --prod` from the repo root; the next deploy refreshes the link.
 Local fallback: `bun run dev` (then open the printed localhost URL); `bun test`
 still proves the preflight gate.
 
