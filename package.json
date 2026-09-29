@@ -6,6 +6,7 @@
   "scripts": {
     "generate": "bun scripts/generate-corpus.ts",
     "generate:ext": "bun scripts/generate-extensions-corpus.ts",
+    "generate:l2": "bun scripts/generate-l2-content.ts",
     "test": "bun test",
     "check": "bunx tsc --noEmit",
     "build": "next build",

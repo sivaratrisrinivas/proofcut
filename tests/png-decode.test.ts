@@ -5,6 +5,7 @@ import {
   decodePng,
   hasTransparency,
   measureWhiteEdgeDepth,
+  writePng,
   writeSolidPng,
 } from "../src/png";
 
@@ -185,5 +186,23 @@ describe("01 decoder seam", () => {
     const bad = Buffer.from(gray);
     bad[25] = 0;
     expect(() => decodePng(bad)).toThrow();
+  });
+
+  test("writePng RGB round-trips through decodePng", () => {
+    const pixels = Buffer.from([10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]);
+    const buf = writePng(2, 2, 3, pixels);
+    const d = decodePng(buf);
+    expect(d.width).toBe(2);
+    expect(d.height).toBe(2);
+    expect(d.channels).toBe(3);
+    expect(Buffer.from(d.pixels).equals(pixels)).toBe(true);
+  });
+
+  test("writePng RGBA round-trips alpha through decodePng", () => {
+    const pixels = Buffer.from([200, 200, 205, 0, 10, 20, 30, 255, 0, 0, 0, 128, 255, 255, 255, 200]);
+    const buf = writePng(2, 2, 4, pixels);
+    const d = decodePng(buf);
+    expect(d.channels).toBe(4);
+    expect(Buffer.from(d.pixels).equals(pixels)).toBe(true);
   });
 });

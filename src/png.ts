@@ -30,32 +30,36 @@ function chunk(type: string, data: Buffer): Buffer {
 }
 
 export function writeSolidPng(width: number, height: number, rgb = [240, 240, 245]): Buffer {
+  const pixels = Buffer.alloc(width * height * 3);
+  for (let i = 0; i < width * height; i++) {
+    pixels[i * 3] = rgb[0];
+    pixels[i * 3 + 1] = rgb[1];
+    pixels[i * 3 + 2] = rgb[2];
+  }
+  return writePng(width, height, 3, pixels);
+}
+
+export function writePng(width: number, height: number, channels: 3 | 4, pixels: Buffer): Buffer {
+  if (!Number.isInteger(width) || !Number.isInteger(height) || width <= 0 || height <= 0) {
+    throw new Error("writePng: bad dims");
+  }
+  if (channels !== 3 && channels !== 4) throw new Error("writePng: channels must be 3 or 4");
+  if (pixels.length !== width * height * channels) throw new Error("writePng: pixel length mismatch");
   const ihdr = Buffer.alloc(13);
   ihdr.writeUInt32BE(width, 0);
   ihdr.writeUInt32BE(height, 4);
   ihdr[8] = 8;
-  ihdr[9] = 2;
-  ihdr[10] = 0;
-  ihdr[11] = 0;
-  ihdr[12] = 0;
-
-  const rowLen = 1 + width * 3;
-  const raw = Buffer.alloc(rowLen * height);
+  ihdr[9] = channels === 3 ? 2 : 6;
+  const stride = width * channels;
+  const raw = Buffer.alloc((stride + 1) * height);
   for (let y = 0; y < height; y++) {
-    const off = y * rowLen;
-    raw[off] = 0;
-    for (let x = 0; x < width; x++) {
-      raw[off + 1 + x * 3] = rgb[0];
-      raw[off + 1 + x * 3 + 1] = rgb[1];
-      raw[off + 1 + x * 3 + 2] = rgb[2];
-    }
+    raw[y * (stride + 1)] = 0;
+    pixels.copy(raw, y * (stride + 1) + 1, y * stride, (y + 1) * stride);
   }
-  const compressed = deflateSync(raw);
-
   return Buffer.concat([
     PNG_SIG,
     chunk("IHDR", ihdr),
-    chunk("IDAT", Buffer.from(compressed)),
+    chunk("IDAT", Buffer.from(deflateSync(raw))),
     chunk("IEND", Buffer.alloc(0)),
   ]);
 }
