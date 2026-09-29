@@ -8,7 +8,7 @@
     "generate:ext": "bun scripts/generate-extensions-corpus.ts",
     "test": "bun test",
     "check": "bunx tsc --noEmit",
-    "build": "bunx tsc --noEmit",
+    "build": "next build",
     "dev": "next dev"
   },
   "devDependencies": {

@@ -95,17 +95,15 @@ production track.
 
 ## Public link
 
-Status: deploy-ready, pending a manual `vercel deploy` from an authenticated
-environment (no Vercel credentials in this workspace, so no live URL is claimed
-here). The deploy target is Vercel per ADR-0001; the Next.js app needs zero
-config — `vercel deploy` (or `bunx vercel deploy`) from the repo root serves
-the full demo: single demo login (`Continue as demo-artist`, no password, per
-`src/demoAuth.ts`), the script-driven 3-minute walkthrough (`#walkthrough`
-section plus `docs/demo-script.md`, 7 beats totalling 180s per
-`src/demoWalkthrough.ts`), and the upload to overlays to before-and-after to
-sliders to production-path flow. Until the link is live, run the demo locally
-with `bun run dev` (then open the printed localhost URL) and follow the
-in-app walkthrough; `bun test` still proves the preflight gate.
+Status: live at **https://proofcut.vercel.app** (production deploy on Vercel
+per ADR-0001, zero-config Next.js). It serves the full demo: single demo login
+(`Continue as demo-artist`, no password, per `src/demoAuth.ts`), the
+script-driven 3-minute walkthrough (`#walkthrough` section plus
+`docs/demo-script.md`, 7 beats totalling 180s per `src/demoWalkthrough.ts`),
+and the upload to overlays to before-and-after to sliders to production-path
+flow. To redeploy after changes, run `vercel --prod` from the repo root.
+Local fallback: `bun run dev` (then open the printed localhost URL); `bun test`
+still proves the preflight gate.
 
 ## Guards
 
