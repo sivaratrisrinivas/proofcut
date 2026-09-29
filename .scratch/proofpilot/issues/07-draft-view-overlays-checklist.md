@@ -4,7 +4,7 @@
 
 **Blocked by:** 06 app shell + upload + panel.
 
-**Status:** ready-for-agent
+**Status:** ready-for-human
 
 - [x] Side-by-side shows dashed magenta cut line overlay plus bleed overlay
 - [x] QC checklist ticks come from code measurements only
