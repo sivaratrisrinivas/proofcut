@@ -92,6 +92,8 @@ export function buildChecklist(r: PreflightResult): ChecklistTick[] {
 
 const BANNED = /sorry|unfortunately|can't/i;
 
+export const BANNED_RE = BANNED;
+
 function failLine(r: PreflightResult, code: string): string | null {
   const m = r.measurements;
   switch (code) {
