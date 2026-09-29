@@ -6,6 +6,10 @@ import type { Job } from "../src/queue";
 import type { AuditEntry } from "../src/audit";
 import type { ReviewDecision } from "../src/review";
 import type { UploadPanel } from "../src/upload";
+import type { Dashboard } from "../src/metrics";
+import { HOLD_RATE_GUARD, TOUCHES_AFTER, TOUCHES_BEFORE } from "../src/metrics";
+import type { RoiInputs } from "../src/roi";
+import { computeRoi, defaultRoiInputs, roiAssumptions } from "../src/roi";
 import { buildChecklist, composeMessage, overlaySpec } from "../src/draft";
 
 const QUEUE_FILTERS = [
@@ -18,6 +22,42 @@ const QUEUE_FILTERS = [
 ];
 
 const DEMO_ACTOR = "demo-artist";
+
+const ROI_SLIDERS: Array<{ key: keyof RoiInputs; min: number; max: number; step: number }> = [
+  { key: "ordersPerMonth", min: 10_000, max: 200_000, step: 1_000 },
+  { key: "percentManual", min: 0, max: 100, step: 1 },
+  { key: "minutesSavedPerOrder", min: 0, max: 20, step: 0.5 },
+  { key: "dollarsPerMinute", min: 0, max: 1.5, step: 0.05 },
+  { key: "reprintPct", min: 0, max: 5, step: 0.1 },
+  { key: "costPerReprint", min: 0, max: 50, step: 0.5 },
+  { key: "capturePct", min: 0, max: 50, step: 0.5 },
+];
+
+const usdWhole = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
+function MetricCard({
+  testid,
+  label,
+  value,
+  children,
+}: {
+  testid: string;
+  label: string;
+  value: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div style={{ border: "1px solid #ddd", background: "#fff", padding: 12 }} data-testid={testid}>
+      <div style={{ fontSize: 12, color: "#555" }}>{label}</div>
+      <div style={{ fontSize: 24, fontWeight: "bold" }}>{value}</div>
+      <div style={{ fontSize: 12, color: "#555" }}>{children}</div>
+    </div>
+  );
+}
 
 export default function UploadPage() {
   const [products, setProducts] = useState<ProductSpec[]>([]);
@@ -40,6 +80,9 @@ export default function UploadPage() {
   const [audit, setAudit] = useState<AuditEntry[]>([]);
   const [decided, setDecided] = useState<Record<string, ReviewDecision>>({});
   const [reviewError, setReviewError] = useState("");
+  const [metrics, setMetrics] = useState<Dashboard | null>(null);
+  const [metricsError, setMetricsError] = useState("");
+  const [roiInputs, setRoiInputs] = useState<RoiInputs>(() => defaultRoiInputs());
 
   useEffect(() => {
     fetch("/api/preflight")
@@ -68,6 +111,16 @@ export default function UploadPage() {
   }, [queueFilter]);
 
   useEffect(() => {
+    fetch("/api/metrics")
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.dashboard) setMetrics(d.dashboard as Dashboard);
+        else setMetricsError(d.error ?? "metrics failed");
+      })
+      .catch(() => setMetricsError("metrics unavailable"));
+  }, []);
+
+  useEffect(() => {
     if (!selectedId) return;
     setNowMs(Date.now());
     const t = setInterval(() => setNowMs(Date.now()), 1000);
@@ -75,6 +128,23 @@ export default function UploadPage() {
   }, [selectedId]);
 
   const selected = useMemo(() => queue.find((j) => j.id === selectedId) ?? null, [queue, selectedId]);
+
+  const assumptions = useMemo(() => roiAssumptions(), []);
+  const roi = useMemo(() => {
+    try {
+      return computeRoi(roiInputs);
+    } catch {
+      return null;
+    }
+  }, [roiInputs]);
+  const decidedCount = Object.keys(decided).length;
+  const liveTouchesPerJob =
+    metrics && metrics.total > 0 ? (decidedCount * TOUCHES_AFTER) / metrics.total : 0;
+
+  function setRoi(key: keyof RoiInputs, value: number) {
+    if (!Number.isFinite(value) || value < 0) return;
+    setRoiInputs((prev) => ({ ...prev, [key]: value }));
+  }
 
   function selectJob(id: string) {
     setSelectedId(id);
@@ -442,6 +512,113 @@ export default function UploadPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        ) : null}
+      </section>
+      <section style={{ marginTop: 32 }} data-testid="dashboard">
+        <h2>Metrics dashboard</h2>
+        <p>
+          Seed-queue stats from code measurements. The 7 demo seeds are risk-concentrated for review practice,
+          so their hold rate sits above the guard — the full-corpus harness hold stays under it (see{" "}
+          <code>bun test</code>). Touches climb from 0 toward the {TOUCHES_BEFORE} to{" "}
+          {TOUCHES_AFTER} target as reviews above are logged.
+        </p>
+        {metricsError ? <p role="alert">Error: {metricsError}</p> : null}
+        {!metrics && !metricsError ? <p>Loading metrics…</p> : null}
+        {metrics ? (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
+            <MetricCard testid="metric-autopass" label="Auto-pass" value={`${metrics.autoPassPct.toFixed(1)}%`}>
+              {metrics.passes} of {metrics.total} jobs
+            </MetricCard>
+            <MetricCard testid="metric-touches" label="Touches per job" value={liveTouchesPerJob.toFixed(2)}>
+              Before {TOUCHES_BEFORE} → target {TOUCHES_AFTER} · {decidedCount} of {metrics.total} reviewed
+            </MetricCard>
+            <MetricCard testid="metric-minutes" label="Minutes saved (potential)" value={String(metrics.minutesSaved)}>
+              {metrics.passes} passes × 16 min auto-drafted
+            </MetricCard>
+            <MetricCard
+              testid="metric-holdrate"
+              label="Hold rate (guard under 40%)"
+              value={`${(metrics.holdRate * 100).toFixed(1)}%`}
+            >
+              {metrics.holds} held ·{" "}
+              <span style={{ fontWeight: "bold", color: metrics.holdGuardOk ? "green" : "red" }}>
+                {metrics.holdGuardOk
+                  ? `Under the ${(HOLD_RATE_GUARD * 100).toFixed(0)}% guard`
+                  : `Over the ${(HOLD_RATE_GUARD * 100).toFixed(0)}% guard`}
+              </span>
+            </MetricCard>
+          </div>
+        ) : null}
+      </section>
+      <section style={{ marginTop: 32 }} data-testid="roi">
+        <h2>ROI sliders</h2>
+        <p>
+          Every input is an assumption, never a company fact. Monthly proof volume is the weakest input —
+          confirm it with the company before quoting with confidence.
+        </p>
+        <div style={{ display: "grid", gap: 12, maxWidth: 560 }}>
+          {ROI_SLIDERS.map((s) => {
+            const meta = assumptions.find((a) => a.key === s.key);
+            return (
+              <label
+                key={s.key}
+                data-testid={`roi-${s.key}`}
+                style={
+                  meta?.weakest
+                    ? { border: "2px solid #b45309", background: "#fffbeb", padding: 8, display: "grid", gap: 4 }
+                    : { display: "grid", gap: 4 }
+                }
+              >
+                <span>
+                  <strong>{meta?.label ?? s.key}</strong> · expected {meta?.range}
+                  {meta?.weakest ? (
+                    <em> · weakest input — confirm with the company, never presented as fact</em>
+                  ) : null}
+                </span>
+                <span style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <input
+                    type="range"
+                    aria-label={meta?.label ?? s.key}
+                    min={s.min}
+                    max={s.max}
+                    step={s.step}
+                    value={roiInputs[s.key]}
+                    onChange={(e) => setRoi(s.key, Number(e.target.value))}
+                    style={{ flex: 1 }}
+                  />
+                  <input
+                    aria-label={`${meta?.label ?? s.key} value`}
+                    value={String(roiInputs[s.key])}
+                    inputMode="decimal"
+                    style={{ width: 96 }}
+                    onChange={(e) => {
+                      const v = Number(e.target.value);
+                      if (e.target.value.trim() !== "" && Number.isFinite(v)) setRoi(s.key, v);
+                    }}
+                  />
+                </span>
+              </label>
+            );
+          })}
+        </div>
+        {roi ? (
+          <div style={{ marginTop: 16, border: "1px solid #ddd", background: "#fff", padding: 12, maxWidth: 560 }} data-testid="roi-results">
+            <h3>Estimated savings (assumed inputs)</h3>
+            <ul style={{ listStyle: "none", padding: 0, display: "grid", gap: 4 }}>
+              <li>Labor per month: {usdWhole.format(Math.round(roi.laborMonthly))}</li>
+              <li>Reprints avoided per month: {usdWhole.format(Math.round(roi.reprintMonthly))}</li>
+              <li>Gross per month: {usdWhole.format(Math.round(roi.grossMonthly))}</li>
+              <li>Captured per month: {usdWhole.format(Math.round(roi.capturedMonthly))}</li>
+              <li>
+                <strong>Captured per year: {usdWhole.format(Math.round(roi.capturedAnnual))}</strong>
+              </li>
+            </ul>
+            <p style={{ fontSize: 12, color: "#555" }}>
+              Labor = orders × percent manual × minutes saved × dollars per minute; reprints = orders ×
+              reprint percent × cost per reprint; captured applies the year-one capture percent. Year-one
+              capture claimed at 20 to 25% only.
+            </p>
           </div>
         ) : null}
       </section>
