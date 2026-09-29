@@ -95,10 +95,17 @@ production track.
 
 ## Public link
 
-Status: pending a manual `vercel deploy` of the Next.js front end (no web app
-lives in this repo yet; the demo runs as a Bun harness plus walkthrough). The
-deploy target is Vercel per ADR-0001. Until the link is live, run the demo
-locally with `bun test` and follow `docs/demo-script.md`.
+Status: deploy-ready, pending a manual `vercel deploy` from an authenticated
+environment (no Vercel credentials in this workspace, so no live URL is claimed
+here). The deploy target is Vercel per ADR-0001; the Next.js app needs zero
+config — `vercel deploy` (or `bunx vercel deploy`) from the repo root serves
+the full demo: single demo login (`Continue as demo-artist`, no password, per
+`src/demoAuth.ts`), the script-driven 3-minute walkthrough (`#walkthrough`
+section plus `docs/demo-script.md`, 7 beats totalling 180s per
+`src/demoWalkthrough.ts`), and the upload to overlays to before-and-after to
+sliders to production-path flow. Until the link is live, run the demo locally
+with `bun run dev` (then open the printed localhost URL) and follow the
+in-app walkthrough; `bun test` still proves the preflight gate.
 
 ## Guards
 

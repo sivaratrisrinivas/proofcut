@@ -11,6 +11,8 @@ import { HOLD_RATE_GUARD, TOUCHES_AFTER, TOUCHES_BEFORE } from "../src/metrics";
 import type { RoiInputs } from "../src/roi";
 import { computeRoi, defaultRoiInputs, roiAssumptions } from "../src/roi";
 import { buildChecklist, composeMessage, overlaySpec } from "../src/draft";
+import { DEMO_SESSION_KEY, DEMO_USER, createDemoSession, isDemoSession } from "../src/demoAuth";
+import { DEMO_STEPS, DEMO_WALKTHROUGH_TOTAL_S } from "../src/demoWalkthrough";
 
 const QUEUE_FILTERS = [
   { value: "all", label: "All" },
@@ -21,7 +23,7 @@ const QUEUE_FILTERS = [
   { value: "tiny-text", label: "Tiny text" },
 ];
 
-const DEMO_ACTOR = "demo-artist";
+const DEMO_ACTOR = DEMO_USER;
 
 const ROI_SLIDERS: Array<{ key: keyof RoiInputs; min: number; max: number; step: number }> = [
   { key: "ordersPerMonth", min: 10_000, max: 200_000, step: 1_000 },
@@ -59,6 +61,18 @@ function MetricCard({
   );
 }
 
+function WalkthroughList({ linked }: { linked: boolean }) {
+  return (
+    <ol>
+      {DEMO_STEPS.map((s) => (
+        <li key={s.id}>
+          {linked ? <a href={s.target}>{s.title}</a> : <strong>{s.title}</strong>} — {s.detail}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 export default function UploadPage() {
   const [products, setProducts] = useState<ProductSpec[]>([]);
   const [demoFiles, setDemoFiles] = useState<string[]>([]);
@@ -83,6 +97,18 @@ export default function UploadPage() {
   const [metrics, setMetrics] = useState<Dashboard | null>(null);
   const [metricsError, setMetricsError] = useState("");
   const [roiInputs, setRoiInputs] = useState<RoiInputs>(() => defaultRoiInputs());
+  const [session, setSession] = useState<string | null>(null);
+  const [sessionChecked, setSessionChecked] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(DEMO_SESSION_KEY);
+      setSession(isDemoSession(stored) ? (stored as string) : null);
+    } catch {
+      setSession(null);
+    }
+    setSessionChecked(true);
+  }, []);
 
   useEffect(() => {
     fetch("/api/preflight")
@@ -144,6 +170,25 @@ export default function UploadPage() {
   function setRoi(key: keyof RoiInputs, value: number) {
     if (!Number.isFinite(value) || value < 0) return;
     setRoiInputs((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function login() {
+    try {
+      localStorage.setItem(DEMO_SESSION_KEY, createDemoSession());
+    } catch {
+      // storage unavailable; keep session in memory only
+    }
+    setSession(DEMO_USER);
+  }
+
+  function logout() {
+    try {
+      localStorage.removeItem(DEMO_SESSION_KEY);
+    } catch {
+      // ignore
+    }
+    setSession(null);
+    setSelectedId("");
   }
 
   function selectJob(id: string) {
@@ -254,10 +299,49 @@ export default function UploadPage() {
     setPreviewUrl(nextPreview);
   }
 
+  if (!sessionChecked) {
+    return (
+      <div>
+        <h1>ProofPilot upload</h1>
+        <p>Loading demo session…</p>
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div>
+        <h1>ProofPilot demo</h1>
+        <p>
+          Single demo login stands in for auth per ADR-0001. No password, no private data —
+          one click signs in as {DEMO_USER}.
+        </p>
+        <button type="button" onClick={login}>
+          Continue as {DEMO_USER}
+        </button>
+        <section style={{ marginTop: 24 }} data-testid="walkthrough">
+          <h2>3-minute walkthrough (about {DEMO_WALKTHROUGH_TOTAL_S}s)</h2>
+          <p>Follow the beats below after signing in. Timed narration lives in <code>docs/demo-script.md</code>.</p>
+          <WalkthroughList linked={false} />
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1>ProofPilot upload</h1>
-      <p>Upload art with ordered size and product type. Numbers come from the preflight seam only.</p>
+      <p>
+        Upload art with ordered size and product type. Numbers come from the preflight seam only. Signed in
+        as {session} (demo login) <button type="button" onClick={logout}>Sign out</button>
+      </p>
+      <section style={{ marginTop: 16 }} data-testid="walkthrough" id="walkthrough">
+        <h2>3-minute walkthrough (about {DEMO_WALKTHROUGH_TOTAL_S}s)</h2>
+        <p>Run a preflight below first — the draft overlays unlock once a verdict panel exists.</p>
+        <WalkthroughList linked />
+      </section>
+      <section style={{ marginTop: 24 }} id="upload">
+      <h2>Upload</h2>
       <form onSubmit={submit} style={{ display: "grid", gap: 12, maxWidth: 480 }}>
         <label>
           File (PNG or PDF)
@@ -291,6 +375,7 @@ export default function UploadPage() {
         <button type="submit">Run preflight</button>
       </form>
       {error ? <p role="alert">Error: {error}</p> : null}
+      </section>
       {panel ? (
         <section style={{ marginTop: 24 }}>
           <h2>
@@ -315,7 +400,7 @@ export default function UploadPage() {
         </section>
       ) : null}
       {panel ? (
-        <section style={{ marginTop: 32 }}>
+        <section style={{ marginTop: 32 }} id="draft">
           <h2>Draft view</h2>
           {!panel.result || !draft ? (
             <p>
@@ -411,10 +496,10 @@ export default function UploadPage() {
           )}
         </section>
       ) : null}
-      <section style={{ marginTop: 32 }}>
+      <section style={{ marginTop: 32 }} id="queue">
         <h2>Artist queue</h2>
         <p>
-          Signed in as {DEMO_ACTOR} (demo login). Seeded demo jobs, riskiest first. Only high-confidence
+          Seeded demo jobs, riskiest first. Only high-confidence
           passes can auto-send; soft-fails always need review. The system never charges, reprints, or scraps.
         </p>
         <label>
@@ -515,7 +600,7 @@ export default function UploadPage() {
           </div>
         ) : null}
       </section>
-      <section style={{ marginTop: 32 }} data-testid="dashboard">
+      <section style={{ marginTop: 32 }} data-testid="dashboard" id="dashboard">
         <h2>Metrics dashboard</h2>
         <p>
           Seed-queue stats from code measurements. The 7 demo seeds are risk-concentrated for review practice,
@@ -551,7 +636,7 @@ export default function UploadPage() {
           </div>
         ) : null}
       </section>
-      <section style={{ marginTop: 32 }} data-testid="roi">
+      <section style={{ marginTop: 32 }} data-testid="roi" id="roi">
         <h2>ROI sliders</h2>
         <p>
           Every input is an assumption, never a company fact. Monthly proof volume is the weakest input —
@@ -621,6 +706,24 @@ export default function UploadPage() {
             </p>
           </div>
         ) : null}
+      </section>
+      <section style={{ marginTop: 32 }} data-testid="before-after" id="before-after">
+        <h2>Before and after</h2>
+        <p>
+          Before: {TOUCHES_BEFORE} touches per job, about 20 minutes of artist time. After: {TOUCHES_AFTER}{" "}
+          touch, about 4 minutes on flagged jobs, zero on clean auto-drafts. Approve the 2 clean jobs above,
+          send fix notes on the 3 flagged ones, and watch touches per job move toward {TOUCHES_BEFORE} to{" "}
+          {TOUCHES_AFTER} in the dashboard.
+        </p>
+      </section>
+      <section style={{ marginTop: 32 }} data-testid="production" id="production">
+        <h2>Production path</h2>
+        <p>
+          Prototype specs are static JSON standing in for the Guru spec DB. The production path runs Guru to
+          RIP to Reply in shadow mode: mocked imposition, RIP, order, and Reply calls beside the live
+          harness, one demo login standing in for auth. Per ADR-0001 the deploy target is Vercel; see the
+          README public-link section for the live link once deployed.
+        </p>
       </section>
     </div>
   );
