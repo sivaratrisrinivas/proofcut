@@ -1,0 +1,706 @@
+[
+  {
+    "file": "diecut-001.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 180,
+    "bleedWidthIn": 0.1390957216208335,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  },
+  {
+    "file": "diecut-002.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 315,
+    "bleedWidthIn": 0.19688318268745206,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-003.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 326,
+    "bleedWidthIn": 0.1,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ]
+  },
+  {
+    "file": "diecut-004.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 72,
+    "bleedWidthIn": 0.13885551290004514,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  },
+  {
+    "file": "diecut-005.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 245,
+    "bleedWidthIn": 0.16456649440224283,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-006.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 231,
+    "bleedWidthIn": 0.19460575173725375,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-007.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 336,
+    "bleedWidthIn": 0.15783905680291355,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-008.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 327,
+    "bleedWidthIn": 0.12726519054267554,
+    "cutlinePresent": false,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ]
+  },
+  {
+    "file": "diecut-009.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 349,
+    "bleedWidthIn": 0.14098212561220863,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-010.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 345,
+    "bleedWidthIn": 0.19272189965122377,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-011.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 326,
+    "bleedWidthIn": 0.1,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ]
+  },
+  {
+    "file": "diecut-012.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 310,
+    "bleedWidthIn": 0.13417279748246075,
+    "cutlinePresent": false,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ]
+  },
+  {
+    "file": "diecut-013.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 325,
+    "bleedWidthIn": 0.17168518012040296,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-014.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 339,
+    "bleedWidthIn": 0.17842981698340737,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-015.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 344,
+    "bleedWidthIn": 0.15441660096985288,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-016.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 306,
+    "bleedWidthIn": 0.19244521225919015,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-017.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 303,
+    "bleedWidthIn": 0.14792440544697455,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-018.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 322,
+    "bleedWidthIn": 0.19422616288065908,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-019.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 348,
+    "bleedWidthIn": 0.1595977327611763,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-020.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 332,
+    "bleedWidthIn": 0.13559917168458924,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-021.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 313,
+    "bleedWidthIn": 0.19827591252396815,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-022.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 180,
+    "bleedWidthIn": 0.14896122004720383,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  },
+  {
+    "file": "diecut-023.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 314,
+    "bleedWidthIn": 0.08,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ]
+  },
+  {
+    "file": "diecut-024.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 337,
+    "bleedWidthIn": 0.16151589730288834,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-025.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 96,
+    "bleedWidthIn": 0.13722662142245098,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  },
+  {
+    "file": "diecut-026.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 314,
+    "bleedWidthIn": 0.17637150207883678,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-027.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 307,
+    "bleedWidthIn": 0.14430209528654814,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-028.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 120,
+    "bleedWidthIn": 0.17075638752430677,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  },
+  {
+    "file": "diecut-029.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 180,
+    "bleedWidthIn": 0.13687198093393818,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  },
+  {
+    "file": "diecut-030.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 324,
+    "bleedWidthIn": 0.05,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ]
+  },
+  {
+    "file": "diecut-031.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 327,
+    "bleedWidthIn": 0.16461476520635188,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-032.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 324,
+    "bleedWidthIn": 0.16098492867313324,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-033.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 227,
+    "bleedWidthIn": 0.15227681103278884,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-034.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 345,
+    "bleedWidthIn": 0.16047711222199723,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-035.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 211,
+    "bleedWidthIn": 0.15746708805672824,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-036.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 313,
+    "bleedWidthIn": 0.18448064935510047,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-037.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 315,
+    "bleedWidthIn": 0.136995585472323,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-038.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 305,
+    "bleedWidthIn": 0.16435419553308747,
+    "cutlinePresent": false,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ]
+  },
+  {
+    "file": "diecut-039.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 346,
+    "bleedWidthIn": 0.13416104984353297,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-040.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 332,
+    "bleedWidthIn": 0.1256067948008422,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-041.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 323,
+    "bleedWidthIn": 0.05,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ]
+  },
+  {
+    "file": "diecut-042.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 324,
+    "bleedWidthIn": 0.1879226401739288,
+    "cutlinePresent": false,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ]
+  },
+  {
+    "file": "diecut-043.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 313,
+    "bleedWidthIn": 0.1260477015923243,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-044.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 316,
+    "bleedWidthIn": 0.15513106889557093,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-045.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 326,
+    "bleedWidthIn": 0.1826622511493042,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-046.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 311,
+    "bleedWidthIn": 0,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ]
+  },
+  {
+    "file": "diecut-047.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 348,
+    "bleedWidthIn": 0.15037872104439884,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-048.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 338,
+    "bleedWidthIn": 0.14181757305632345,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-049.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 306,
+    "bleedWidthIn": 0.15517099724384026,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-050.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 270,
+    "bleedWidthIn": 0.15375338888843543,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-051.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 313,
+    "bleedWidthIn": 0.17722151414491236,
+    "cutlinePresent": false,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ]
+  },
+  {
+    "file": "diecut-052.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 180,
+    "bleedWidthIn": 0.19251097681117244,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  },
+  {
+    "file": "diecut-053.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 336,
+    "bleedWidthIn": 0.16188174446579068,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-054.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 308,
+    "bleedWidthIn": 0.16873781642643734,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-055.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 301,
+    "bleedWidthIn": 0.18650773981935345,
+    "cutlinePresent": false,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ]
+  },
+  {
+    "file": "diecut-056.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 241,
+    "bleedWidthIn": 0.12697251893114297,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-057.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 332,
+    "bleedWidthIn": 0.130489014898194,
+    "cutlinePresent": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": []
+  },
+  {
+    "file": "diecut-058.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 321,
+    "bleedWidthIn": 0.16400265711708925,
+    "cutlinePresent": false,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ]
+  },
+  {
+    "file": "diecut-059.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 2,
+    "targetPpi": 329,
+    "bleedWidthIn": 0.08,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ]
+  },
+  {
+    "file": "diecut-060.png",
+    "productId": "die-cut",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 6,
+    "targetPpi": 96,
+    "bleedWidthIn": 0.140240443428047,
+    "cutlinePresent": true,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ]
+  }
+]

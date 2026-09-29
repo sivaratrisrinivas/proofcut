@@ -1,0 +1,17 @@
+{
+  "name": "proofpilot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "bun scripts/generate-corpus.ts",
+    "generate:ext": "bun scripts/generate-extensions-corpus.ts",
+    "test": "bun test",
+    "check": "bunx tsc --noEmit",
+    "build": "bunx tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/bun": "latest"
+  }
+}

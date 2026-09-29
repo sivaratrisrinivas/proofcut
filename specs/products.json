@@ -1,0 +1,49 @@
+{
+  "products": [
+    {
+      "id": "die-cut",
+      "displayName": "Die-Cut Stickers",
+      "minPassPpi": 300,
+      "failBelowPpi": 200,
+      "bleedRequiredIn": 0.125,
+      "cutlineRequired": true,
+      "whiteInkRequired": false
+    },
+    {
+      "id": "clear",
+      "displayName": "Clear Stickers",
+      "minPassPpi": 300,
+      "failBelowPpi": 200,
+      "bleedRequiredIn": 0.125,
+      "cutlineRequired": true,
+      "whiteInkRequired": true
+    },
+    {
+      "id": "holographic",
+      "displayName": "Holographic Stickers",
+      "minPassPpi": 300,
+      "failBelowPpi": 200,
+      "bleedRequiredIn": 0.125,
+      "cutlineRequired": true,
+      "whiteInkRequired": true
+    },
+    {
+      "id": "roll-label",
+      "displayName": "Roll Labels",
+      "minPassPpi": 300,
+      "failBelowPpi": 200,
+      "bleedRequiredIn": 0.125,
+      "cutlineRequired": false,
+      "whiteInkRequired": false
+    },
+    {
+      "id": "packaging-tape",
+      "displayName": "Packaging Tape",
+      "minPassPpi": 300,
+      "failBelowPpi": 200,
+      "bleedRequiredIn": 0.125,
+      "cutlineRequired": false,
+      "whiteInkRequired": false
+    }
+  ]
+}
