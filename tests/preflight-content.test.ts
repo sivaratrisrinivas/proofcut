@@ -77,6 +77,7 @@ const L2_DIR = join(import.meta.dir, "..", "corpus-l2-content");
 interface L2Item {
   file: string;
   productId: string;
+  kind?: string;
   orderedWidthIn: number;
   orderedHeightIn: number;
   targetPpi: number;
@@ -85,14 +86,17 @@ interface L2Item {
   hasTransparency: boolean;
   minTextPt: number | null;
   cutlinePresent: boolean;
+  whiteInkPresent?: boolean | null;
   expectedVerdict: "PASS" | "SOFT-FAIL";
   expectedFails: string[];
 }
 
 describe("l2 content wiring", () => {
   test("preflight over L2 lands within 2% of manifest with source labels", async () => {
-    const items = (await Bun.file(join(L2_DIR, "manifest.json")).json()) as L2Item[];
-    expect(items.length).toBe(25);
+    const items = ((await Bun.file(join(L2_DIR, "manifest.json")).json()) as L2Item[]).filter(
+      (it) => it.kind === "png",
+    );
+    expect(items.length).toBe(32);
     for (const it of items) {
       const r = await preflightFile(
         join(L2_DIR, it.file),
@@ -113,6 +117,7 @@ describe("l2 content wiring", () => {
       expect(r.sources?.cutline).toBe("sidecar");
       expect(r.measurements.minTextPt).toBe(it.minTextPt);
       expect(r.measurements.cutlinePresent).toBe(it.cutlinePresent);
+      expect(r.measurements.whiteInkPresent).toBe(it.whiteInkPresent ?? null);
 
       // RGB-black and transparency travel content -> verdict per row.
       expect(r.sources?.color).toBe("content");

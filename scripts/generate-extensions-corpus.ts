@@ -18,7 +18,10 @@ export interface ExtItem {
   expectedWarnings: string[];
 }
 
-const OUT_DIR = join(import.meta.dir, "..", "corpus-ext");
+// Ticket 04: ext PDFs are L2's product core. This script writes its 10 PDFs +
+// sidecars into corpus-l2-content/ (files only); corpus-l2-content/manifest.json
+// is owned by scripts/generate-l2-content.ts, which embeds plan() rows below.
+const OUT_DIR = join(import.meta.dir, "..", "corpus-l2-content");
 
 function pdfBytes(opts: {
   widthIn: number;
@@ -42,7 +45,7 @@ function pdfBytes(opts: {
   return Buffer.from(content, "latin1");
 }
 
-function plan(): ExtItem[] {
+export function plan(): ExtItem[] {
   return [
     {
       file: "cut-001.pdf",
@@ -236,9 +239,10 @@ async function main() {
       ),
     );
   }
-  await writeFile(join(OUT_DIR, "manifest.json"), JSON.stringify(items, null, 2));
+  // No manifest here: corpus-l2-content/manifest.json is owned by
+  // scripts/generate-l2-content.ts, which embeds plan() rows.
   const pass = items.filter((i) => i.expectedVerdict === "PASS").length;
-  console.log(`wrote ${items.length} pdfs to corpus-ext/ (${pass} PASS, ${items.length - pass} SOFT-FAIL)`);
+  console.log(`wrote ${items.length} pdfs to corpus-l2-content/ (${pass} PASS, ${items.length - pass} SOFT-FAIL)`);
 }
 
-await main();
+if (import.meta.main) await main();

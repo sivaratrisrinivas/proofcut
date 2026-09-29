@@ -7,6 +7,8 @@ import {
   measureWhiteEdgeDepth,
   writePng,
 } from "../src/png";
+import { plan as extPdfPlan, type ExtItem } from "./generate-extensions-corpus";
+import { getSpec } from "../src/specs";
 
 // L2 content generator: ~25 PNGs with pixel-level ground truth.
 //
@@ -39,14 +41,17 @@ export interface L2Item {
   transparentPixelCount: number;
   minTextPt: number | null;
   cutlinePresent: boolean;
+  whiteInkPresent: boolean | null;
   note?: string;
   sources: Record<string, string>;
   expectedVerdict: "PASS" | "SOFT-FAIL";
   expectedFails: string[];
+  expectedWarnings: string[];
 }
 
+export type L2ManifestRow = (L2Item & { kind: "png" }) | (ExtItem & { kind: "pdf" });
+
 const OUT_DIR = join(import.meta.dir, "..", "corpus-l2-content");
-const BLEED_REQUIRED_IN = 0.125;
 const WHITE: [number, number, number] = [255, 255, 255];
 const BLACK: [number, number, number] = [0, 0, 0];
 const INK: [number, number, number] = [40, 40, 45];
@@ -181,6 +186,7 @@ interface Spec {
   transparentPixelCount: number;
   minTextPt: number | null;
   cutlinePresent: boolean;
+  whiteInkPresent?: boolean | null;
   note?: string;
 }
 
@@ -343,28 +349,79 @@ function plan(): Spec[] {
       edgeDepthPx: 30, blackPixelCount: 0, transparentPixelCount: 3600, minTextPt: null, cutlinePresent: true,
       note: "combo: 60x60 transparent patch + 30px margin -> bleed SOFT-FAIL",
     },
+    {
+      name: "l2-026.png", productId: "clear", wIn: 3, hIn: 3, ppi: 300, ch: 3,
+      draw: (c) => { rect(c, 0, 0, c.w, c.h, BLUE); disc(c, c.w / 2, c.h / 2, 250, GOLD); },
+      edgeDepthPx: 0, blackPixelCount: 0, transparentPixelCount: 0, minTextPt: null, cutlinePresent: true, whiteInkPresent: false,
+      note: "clear without white ink -> white-ink SOFT-FAIL",
+    },
+    {
+      name: "l2-027.png", productId: "clear", wIn: 3, hIn: 3, ppi: 300, ch: 3,
+      draw: (c) => { rect(c, 0, 0, c.w, c.h, GREEN); disc(c, c.w / 2, c.h / 2, 250, GOLD); },
+      edgeDepthPx: 0, blackPixelCount: 0, transparentPixelCount: 0, minTextPt: null, cutlinePresent: true, whiteInkPresent: true,
+      note: "clear with white ink control -> PASS",
+    },
+    {
+      name: "l2-028.png", productId: "holographic", wIn: 4, hIn: 4, ppi: 310, ch: 3,
+      draw: (c) => { rect(c, 0, 0, c.w, c.h, RED); sash(c, 0.4, 120, GOLD); },
+      edgeDepthPx: 0, blackPixelCount: 0, transparentPixelCount: 0, minTextPt: null, cutlinePresent: true, whiteInkPresent: false,
+      note: "holographic without white ink -> white-ink SOFT-FAIL",
+    },
+    {
+      name: "l2-029.png", productId: "holographic", wIn: 4, hIn: 4, ppi: 310, ch: 4,
+      draw: (c) => { rect(c, 0, 0, c.w, c.h, BLUE); disc(c, c.w / 2, c.h / 2, 340, GOLD); rect(c, 0, 0, 70, 70, BLUE, 0); },
+      edgeDepthPx: 0, blackPixelCount: 0, transparentPixelCount: 4900, minTextPt: null, cutlinePresent: true, whiteInkPresent: true,
+      note: "holographic with white ink + 70x70 transparent corner -> PASS with warning",
+    },
+    {
+      name: "l2-030.png", productId: "clear", wIn: 3, hIn: 3, ppi: 300, ch: 3,
+      draw: (c) => { rect(c, 0, 0, c.w, c.h, LIGHT); textBars(c, 4, 19, 12); },
+      edgeDepthPx: 0, blackPixelCount: 0, transparentPixelCount: 0, minTextPt: 4.5, cutlinePresent: true, whiteInkPresent: false,
+      note: "combo: 4.5pt text + no white ink -> white-ink + tiny-text SOFT-FAIL",
+    },
+    {
+      name: "l2-031.png", productId: "packaging-tape", wIn: 4, hIn: 2, ppi: 300, ch: 3,
+      draw: (c) => { checker(c, 50, GRAY, LIGHT); disc(c, c.w / 2, c.h / 2, 150, RED); },
+      edgeDepthPx: 0, blackPixelCount: 0, transparentPixelCount: 0, minTextPt: null, cutlinePresent: false,
+      note: "tape needs no cutline -> PASS without one",
+    },
+    {
+      name: "l2-032.png", productId: "packaging-tape", wIn: 4, hIn: 2, ppi: 300, ch: 3,
+      draw: (c) => { rect(c, 0, 0, c.w, c.h, GREEN); textBars(c, 2, 33, 12); whiteMargin(c, 36); },
+      edgeDepthPx: 36, blackPixelCount: 0, transparentPixelCount: 0, minTextPt: 8, cutlinePresent: false,
+      note: "36px margin on tape -> bleed SOFT-FAIL",
+    },
   ];
 }
 
 function expectedFor(s: Spec, bleedWidthIn: number): { verdict: "PASS" | "SOFT-FAIL"; fails: string[] } {
+  const spec = getSpec(s.productId);
   const fails: string[] = [];
-  if (s.ppi < 200) fails.push("low-ppi");
-  if (bleedWidthIn < BLEED_REQUIRED_IN) fails.push("bleed");
-  if (s.productId === "die-cut" && !s.cutlinePresent) fails.push("cutline");
+  if (s.ppi < spec.failBelowPpi) fails.push("low-ppi");
+  if (bleedWidthIn < spec.bleedRequiredIn) fails.push("bleed");
+  if (spec.cutlineRequired && !s.cutlinePresent) fails.push("cutline");
+  if (spec.whiteInkRequired && s.whiteInkPresent === false) fails.push("white-ink");
   if (s.minTextPt !== null && s.minTextPt < 6) fails.push("tiny-text");
   return { verdict: fails.length === 0 ? "PASS" : "SOFT-FAIL", fails };
+}
+
+function expectedWarningsFor(s: Spec): string[] {
+  const warnings: string[] = [];
+  if (s.blackPixelCount > 0) warnings.push("rgb-black-auto-convert");
+  if (s.transparentPixelCount > 0) warnings.push("transparency-auto-convert");
+  return warnings;
 }
 
 async function main(): Promise<void> {
   const specs = plan();
   await mkdir(OUT_DIR, { recursive: true });
-  const items: L2Item[] = [];
+  const items: L2ManifestRow[] = [];
   let failures = 0;
 
   for (const s of specs) {
     const pxW = Math.round(s.wIn * s.ppi);
     const pxH = Math.round(s.hIn * s.ppi);
-    const bg: RGB = s.ch === 4 ? [30, 90, 160] : [30, 90, 160];
+    const bg: RGB = [30, 90, 160];
     const c = canvas(pxW, pxH, s.ch, bg);
     s.draw(c);
     const png = writePng(pxW, pxH, s.ch, c.px);
@@ -372,6 +429,7 @@ async function main(): Promise<void> {
 
     const sidecar: Record<string, unknown> = { cutlinePresent: s.cutlinePresent };
     if (s.minTextPt !== null) sidecar["minTextPt"] = s.minTextPt;
+    if (s.whiteInkPresent != null) sidecar["whiteInkPresent"] = s.whiteInkPresent;
     await writeFile(join(OUT_DIR, `${s.name}.sidecar.json`), JSON.stringify(sidecar, null, 2));
 
     // Self-verify through the 01 seam: exact agreement with ground truth.
@@ -385,7 +443,7 @@ async function main(): Promise<void> {
         if (decoded.pixels[o] < 250) transparentCount++;
       }
     }
-    const bleedWidthIn = Math.max(0, BLEED_REQUIRED_IN - edge / s.ppi);
+    const bleedWidthIn = Math.max(0, getSpec(s.productId).bleedRequiredIn - edge / s.ppi);
     const problems: string[] = [];
     if (decoded.width !== pxW || decoded.height !== pxH) problems.push(`dims ${decoded.width}x${decoded.height} != ${pxW}x${pxH}`);
     if (edge !== s.edgeDepthPx) problems.push(`edge ${edge} != truth ${s.edgeDepthPx}`);
@@ -399,6 +457,7 @@ async function main(): Promise<void> {
 
     const { verdict, fails } = expectedFor(s, bleedWidthIn);
     items.push({
+      kind: "png",
       file: s.name,
       productId: s.productId,
       orderedWidthIn: s.wIn,
@@ -414,6 +473,7 @@ async function main(): Promise<void> {
       transparentPixelCount: s.transparentPixelCount,
       minTextPt: s.minTextPt,
       cutlinePresent: s.cutlinePresent,
+      whiteInkPresent: s.whiteInkPresent ?? null,
       ...(s.note ? { note: s.note } : {}),
       sources: {
         ppi: "dims",
@@ -422,15 +482,22 @@ async function main(): Promise<void> {
         transparency: "content",
         text: "sidecar",
         cutline: "sidecar",
+        whiteInk: "sidecar",
       },
       expectedVerdict: verdict,
       expectedFails: fails,
+      expectedWarnings: expectedWarningsFor(s),
     });
   }
 
+  for (const e of extPdfPlan()) {
+    items.push({ ...e, kind: "pdf" });
+  }
+
   await writeFile(join(OUT_DIR, "manifest.json"), JSON.stringify(items, null, 2));
+  const pngCount = specs.length;
   const pass = items.filter((i) => i.expectedVerdict === "PASS").length;
-  console.log(`wrote ${items.length} files to corpus-l2-content/ (${pass} PASS, ${items.length - pass} SOFT-FAIL)`);
+  console.log(`wrote ${pngCount} pngs + ${items.length - pngCount} pdfs to corpus-l2-content/ (${pass} PASS, ${items.length - pass} SOFT-FAIL)`);
   if (failures > 0) {
     console.error(`${failures} self-check failures`);
     process.exit(1);

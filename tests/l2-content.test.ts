@@ -24,6 +24,7 @@ interface L2Item {
   transparentPixelCount: number;
   minTextPt: number | null;
   cutlinePresent: boolean;
+  whiteInkPresent: boolean | null;
   expectedVerdict: "PASS" | "SOFT-FAIL";
   expectedFails: string[];
 }
@@ -35,8 +36,10 @@ describe("l2 content corpus", () => {
   test("25 files agree with manifest ground truth within 2% through the 01 seam", async () => {
     const manifestFile = Bun.file(join(L2_DIR, "manifest.json"));
     expect(await manifestFile.exists()).toBe(true);
-    const items = (await manifestFile.json()) as L2Item[];
-    expect(items.length).toBe(25);
+    const items = ((await manifestFile.json()) as (L2Item & { kind: string })[]).filter(
+      (it) => it.kind === "png",
+    );
+    expect(items.length).toBe(32);
 
     for (const it of items) {
       const buf = Buffer.from(await Bun.file(join(L2_DIR, it.file)).arrayBuffer());
@@ -58,13 +61,16 @@ describe("l2 content corpus", () => {
       const bleed = Math.max(0, 0.125 - edge / it.targetPpi);
       expect(Math.abs(it.bleedWidthIn - bleed)).toBeLessThan(1e-9);
 
-      // Sidecars carry ONLY cut-line + text height per the Q1 split.
+      // Sidecars carry ONLY cut-line + text height (+ white ink for clear/holo,
+      // unmeasurable from pixels) per the Q1 split.
       const sidecar = (await Bun.file(join(L2_DIR, `${it.file}.sidecar.json`)).json()) as Record<string, unknown>;
-      expect(Object.keys(sidecar).sort()).toEqual(
-        it.minTextPt === null ? ["cutlinePresent"] : ["cutlinePresent", "minTextPt"],
-      );
+      const expectedKeys = ["cutlinePresent"];
+      if (it.minTextPt !== null) expectedKeys.push("minTextPt");
+      if (it.whiteInkPresent !== null) expectedKeys.push("whiteInkPresent");
+      expect(Object.keys(sidecar).sort()).toEqual(expectedKeys.sort());
       expect(sidecar["cutlinePresent"]).toBe(it.cutlinePresent);
       if (it.minTextPt !== null) expect(sidecar["minTextPt"]).toBe(it.minTextPt);
+      if (it.whiteInkPresent !== null) expect(sidecar["whiteInkPresent"]).toBe(it.whiteInkPresent);
     }
   }, 60_000);
 

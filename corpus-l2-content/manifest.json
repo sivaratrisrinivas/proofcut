@@ -1,5 +1,6 @@
 [
   {
+    "kind": "png",
     "file": "l2-001.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -15,6 +16,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "logo rings on brand blue, full bleed",
     "sources": {
       "ppi": "dims",
@@ -22,12 +24,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-002.png",
     "productId": "die-cut",
     "orderedWidthIn": 2,
@@ -43,6 +48,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "diagonal sash art, full bleed",
     "sources": {
       "ppi": "dims",
@@ -50,12 +56,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-003.png",
     "productId": "die-cut",
     "orderedWidthIn": 4,
@@ -71,6 +80,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "concentric logo on green, full bleed",
     "sources": {
       "ppi": "dims",
@@ -78,12 +88,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-004.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -99,6 +112,7 @@
     "transparentPixelCount": 0,
     "minTextPt": 8,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "8pt text bars over checker, full bleed",
     "sources": {
       "ppi": "dims",
@@ -106,12 +120,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-005.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -127,6 +144,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "30px white margin @300dpi -> bleed 0.025in SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -134,14 +152,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "bleed"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-006.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -157,6 +178,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "150dpi + 15px margin -> low-ppi + bleed SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -164,15 +186,18 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "low-ppi",
       "bleed"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-007.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -188,6 +213,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "bottom-only 30px white bar: invisible to top-row scan, PASS by construction",
     "sources": {
       "ppi": "dims",
@@ -195,12 +221,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-008.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -216,6 +245,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "100x60 RGB-black block, warn-only -> PASS",
     "sources": {
       "ppi": "dims",
@@ -223,12 +253,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": [
+      "rgb-black-auto-convert"
+    ]
   },
   {
+    "kind": "png",
     "file": "l2-009.png",
     "productId": "die-cut",
     "orderedWidthIn": 4,
@@ -244,6 +279,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "200x150 RGB-black block, warn-only -> PASS",
     "sources": {
       "ppi": "dims",
@@ -251,12 +287,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": [
+      "rgb-black-auto-convert"
+    ]
   },
   {
+    "kind": "png",
     "file": "l2-010.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -272,6 +313,7 @@
     "transparentPixelCount": 6400,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "80x80 transparent corner, warn-only -> PASS",
     "sources": {
       "ppi": "dims",
@@ -279,12 +321,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": [
+      "transparency-auto-convert"
+    ]
   },
   {
+    "kind": "png",
     "file": "l2-011.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -300,6 +347,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "opaque RGBA control, no transparency",
     "sources": {
       "ppi": "dims",
@@ -307,12 +355,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-012.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -328,6 +379,7 @@
     "transparentPixelCount": 0,
     "minTextPt": 5,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "5pt text bars (21px @300dpi) -> tiny-text SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -335,14 +387,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "tiny-text"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-013.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -358,6 +413,7 @@
     "transparentPixelCount": 0,
     "minTextPt": 8,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "8pt text bars (33px @300dpi) -> PASS",
     "sources": {
       "ppi": "dims",
@@ -365,12 +421,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-014.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -386,6 +445,7 @@
     "transparentPixelCount": 0,
     "minTextPt": 6,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "6pt boundary text bars (25px @300dpi) -> PASS",
     "sources": {
       "ppi": "dims",
@@ -393,12 +453,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-015.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -414,6 +477,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": false,
+    "whiteInkPresent": null,
     "note": "no cutline sidecar -> cutline SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -421,14 +485,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "cutline"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-016.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -444,6 +511,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "cutline present control -> PASS",
     "sources": {
       "ppi": "dims",
@@ -451,12 +519,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-017.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -472,6 +543,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "72dpi upscale -> low-ppi SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -479,14 +551,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "low-ppi"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-018.png",
     "productId": "die-cut",
     "orderedWidthIn": 2,
@@ -502,6 +577,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "150dpi -> low-ppi SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -509,14 +585,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "low-ppi"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-019.png",
     "productId": "roll-label",
     "orderedWidthIn": 4,
@@ -532,6 +611,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": false,
+    "whiteInkPresent": null,
     "note": "roll-label needs no cutline -> PASS without one",
     "sources": {
       "ppi": "dims",
@@ -539,12 +619,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-020.png",
     "productId": "roll-label",
     "orderedWidthIn": 4,
@@ -560,6 +643,7 @@
     "transparentPixelCount": 0,
     "minTextPt": 8,
     "cutlinePresent": false,
+    "whiteInkPresent": null,
     "note": "36px margin -> bleed 0.005in SOFT-FAIL (text still 8pt PASS)",
     "sources": {
       "ppi": "dims",
@@ -567,14 +651,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "bleed"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-021.png",
     "productId": "roll-label",
     "orderedWidthIn": 4,
@@ -590,6 +677,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": false,
+    "whiteInkPresent": null,
     "note": "150dpi roll-label -> low-ppi SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -597,14 +685,17 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "low-ppi"
-    ]
+    ],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-022.png",
     "productId": "die-cut",
     "orderedWidthIn": 2,
@@ -620,6 +711,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "stacked logo rings 2x3 -> PASS",
     "sources": {
       "ppi": "dims",
@@ -627,12 +719,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-023.png",
     "productId": "die-cut",
     "orderedWidthIn": 4,
@@ -648,6 +743,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "cross-sash poster 4x6 -> PASS",
     "sources": {
       "ppi": "dims",
@@ -655,12 +751,15 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "PASS",
-    "expectedFails": []
+    "expectedFails": [],
+    "expectedWarnings": []
   },
   {
+    "kind": "png",
     "file": "l2-024.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -676,6 +775,7 @@
     "transparentPixelCount": 0,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "combo: 120x80 black block + 30px margin -> bleed SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -683,14 +783,19 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "bleed"
+    ],
+    "expectedWarnings": [
+      "rgb-black-auto-convert"
     ]
   },
   {
+    "kind": "png",
     "file": "l2-025.png",
     "productId": "die-cut",
     "orderedWidthIn": 3,
@@ -706,6 +811,7 @@
     "transparentPixelCount": 3600,
     "minTextPt": null,
     "cutlinePresent": true,
+    "whiteInkPresent": null,
     "note": "combo: 60x60 transparent patch + 30px margin -> bleed SOFT-FAIL",
     "sources": {
       "ppi": "dims",
@@ -713,11 +819,438 @@
       "blackPixelCount": "content",
       "transparency": "content",
       "text": "sidecar",
-      "cutline": "sidecar"
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
     },
     "expectedVerdict": "SOFT-FAIL",
     "expectedFails": [
       "bleed"
+    ],
+    "expectedWarnings": [
+      "transparency-auto-convert"
     ]
+  },
+  {
+    "kind": "png",
+    "file": "l2-026.png",
+    "productId": "clear",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 300,
+    "pixelWidth": 900,
+    "pixelHeight": 900,
+    "edgeDepthPx": 0,
+    "bleedWidthIn": 0.125,
+    "blackPixelCount": 0,
+    "blackFraction": 0,
+    "hasTransparency": false,
+    "transparentPixelCount": 0,
+    "minTextPt": null,
+    "cutlinePresent": true,
+    "whiteInkPresent": false,
+    "note": "clear without white ink -> white-ink SOFT-FAIL",
+    "sources": {
+      "ppi": "dims",
+      "bleed": "content",
+      "blackPixelCount": "content",
+      "transparency": "content",
+      "text": "sidecar",
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
+    },
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "white-ink"
+    ],
+    "expectedWarnings": []
+  },
+  {
+    "kind": "png",
+    "file": "l2-027.png",
+    "productId": "clear",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 300,
+    "pixelWidth": 900,
+    "pixelHeight": 900,
+    "edgeDepthPx": 0,
+    "bleedWidthIn": 0.125,
+    "blackPixelCount": 0,
+    "blackFraction": 0,
+    "hasTransparency": false,
+    "transparentPixelCount": 0,
+    "minTextPt": null,
+    "cutlinePresent": true,
+    "whiteInkPresent": true,
+    "note": "clear with white ink control -> PASS",
+    "sources": {
+      "ppi": "dims",
+      "bleed": "content",
+      "blackPixelCount": "content",
+      "transparency": "content",
+      "text": "sidecar",
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
+    },
+    "expectedVerdict": "PASS",
+    "expectedFails": [],
+    "expectedWarnings": []
+  },
+  {
+    "kind": "png",
+    "file": "l2-028.png",
+    "productId": "holographic",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 310,
+    "pixelWidth": 1240,
+    "pixelHeight": 1240,
+    "edgeDepthPx": 0,
+    "bleedWidthIn": 0.125,
+    "blackPixelCount": 0,
+    "blackFraction": 0,
+    "hasTransparency": false,
+    "transparentPixelCount": 0,
+    "minTextPt": null,
+    "cutlinePresent": true,
+    "whiteInkPresent": false,
+    "note": "holographic without white ink -> white-ink SOFT-FAIL",
+    "sources": {
+      "ppi": "dims",
+      "bleed": "content",
+      "blackPixelCount": "content",
+      "transparency": "content",
+      "text": "sidecar",
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
+    },
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "white-ink"
+    ],
+    "expectedWarnings": []
+  },
+  {
+    "kind": "png",
+    "file": "l2-029.png",
+    "productId": "holographic",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 310,
+    "pixelWidth": 1240,
+    "pixelHeight": 1240,
+    "edgeDepthPx": 0,
+    "bleedWidthIn": 0.125,
+    "blackPixelCount": 0,
+    "blackFraction": 0,
+    "hasTransparency": true,
+    "transparentPixelCount": 4900,
+    "minTextPt": null,
+    "cutlinePresent": true,
+    "whiteInkPresent": true,
+    "note": "holographic with white ink + 70x70 transparent corner -> PASS with warning",
+    "sources": {
+      "ppi": "dims",
+      "bleed": "content",
+      "blackPixelCount": "content",
+      "transparency": "content",
+      "text": "sidecar",
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
+    },
+    "expectedVerdict": "PASS",
+    "expectedFails": [],
+    "expectedWarnings": [
+      "transparency-auto-convert"
+    ]
+  },
+  {
+    "kind": "png",
+    "file": "l2-030.png",
+    "productId": "clear",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 300,
+    "pixelWidth": 900,
+    "pixelHeight": 900,
+    "edgeDepthPx": 0,
+    "bleedWidthIn": 0.125,
+    "blackPixelCount": 0,
+    "blackFraction": 0,
+    "hasTransparency": false,
+    "transparentPixelCount": 0,
+    "minTextPt": 4.5,
+    "cutlinePresent": true,
+    "whiteInkPresent": false,
+    "note": "combo: 4.5pt text + no white ink -> white-ink + tiny-text SOFT-FAIL",
+    "sources": {
+      "ppi": "dims",
+      "bleed": "content",
+      "blackPixelCount": "content",
+      "transparency": "content",
+      "text": "sidecar",
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
+    },
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "white-ink",
+      "tiny-text"
+    ],
+    "expectedWarnings": []
+  },
+  {
+    "kind": "png",
+    "file": "l2-031.png",
+    "productId": "packaging-tape",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 2,
+    "targetPpi": 300,
+    "pixelWidth": 1200,
+    "pixelHeight": 600,
+    "edgeDepthPx": 0,
+    "bleedWidthIn": 0.125,
+    "blackPixelCount": 0,
+    "blackFraction": 0,
+    "hasTransparency": false,
+    "transparentPixelCount": 0,
+    "minTextPt": null,
+    "cutlinePresent": false,
+    "whiteInkPresent": null,
+    "note": "tape needs no cutline -> PASS without one",
+    "sources": {
+      "ppi": "dims",
+      "bleed": "content",
+      "blackPixelCount": "content",
+      "transparency": "content",
+      "text": "sidecar",
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
+    },
+    "expectedVerdict": "PASS",
+    "expectedFails": [],
+    "expectedWarnings": []
+  },
+  {
+    "kind": "png",
+    "file": "l2-032.png",
+    "productId": "packaging-tape",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 2,
+    "targetPpi": 300,
+    "pixelWidth": 1200,
+    "pixelHeight": 600,
+    "edgeDepthPx": 36,
+    "bleedWidthIn": 0.0050000000000000044,
+    "blackPixelCount": 0,
+    "blackFraction": 0,
+    "hasTransparency": false,
+    "transparentPixelCount": 0,
+    "minTextPt": 8,
+    "cutlinePresent": false,
+    "whiteInkPresent": null,
+    "note": "36px margin on tape -> bleed SOFT-FAIL",
+    "sources": {
+      "ppi": "dims",
+      "bleed": "content",
+      "blackPixelCount": "content",
+      "transparency": "content",
+      "text": "sidecar",
+      "cutline": "sidecar",
+      "whiteInk": "sidecar"
+    },
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "bleed"
+    ],
+    "expectedWarnings": []
+  },
+  {
+    "file": "cut-001.pdf",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 300,
+    "bleedWidthIn": 0.15,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": false,
+    "minTextPt": null,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "PASS",
+    "expectedFails": [],
+    "expectedWarnings": [],
+    "kind": "pdf"
+  },
+  {
+    "file": "cut-002.pdf",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 300,
+    "bleedWidthIn": 0.15,
+    "cutContourInPdf": false,
+    "whiteInkInPdf": false,
+    "minTextPt": null,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "cutline"
+    ],
+    "expectedWarnings": [],
+    "kind": "pdf"
+  },
+  {
+    "file": "cut-003.pdf",
+    "productId": "clear",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 300,
+    "bleedWidthIn": 0.15,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": true,
+    "minTextPt": null,
+    "colorMode": "RGB",
+    "hasTransparency": null,
+    "expectedVerdict": "PASS",
+    "expectedFails": [],
+    "expectedWarnings": [
+      "rgb-black-auto-convert"
+    ],
+    "kind": "pdf"
+  },
+  {
+    "file": "cut-004.pdf",
+    "productId": "clear",
+    "orderedWidthIn": 2,
+    "orderedHeightIn": 2,
+    "targetPpi": 300,
+    "bleedWidthIn": 0.15,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": false,
+    "minTextPt": 8,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "white-ink"
+    ],
+    "expectedWarnings": [],
+    "kind": "pdf"
+  },
+  {
+    "file": "cut-005.pdf",
+    "productId": "die-cut",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 72,
+    "bleedWidthIn": 0.15,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": false,
+    "minTextPt": null,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi"
+    ],
+    "expectedWarnings": [],
+    "kind": "pdf"
+  },
+  {
+    "file": "white-001.pdf",
+    "productId": "clear",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 320,
+    "bleedWidthIn": 0.16,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": true,
+    "minTextPt": null,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "PASS",
+    "expectedFails": [],
+    "expectedWarnings": [],
+    "kind": "pdf"
+  },
+  {
+    "file": "white-002.pdf",
+    "productId": "clear",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 320,
+    "bleedWidthIn": 0.16,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": false,
+    "minTextPt": 4.5,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "white-ink",
+      "tiny-text"
+    ],
+    "expectedWarnings": [],
+    "kind": "pdf"
+  },
+  {
+    "file": "white-003.pdf",
+    "productId": "holographic",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 310,
+    "bleedWidthIn": 0.14,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": true,
+    "minTextPt": null,
+    "colorMode": null,
+    "hasTransparency": true,
+    "expectedVerdict": "PASS",
+    "expectedFails": [],
+    "expectedWarnings": [
+      "transparency-auto-convert"
+    ],
+    "kind": "pdf"
+  },
+  {
+    "file": "white-004.pdf",
+    "productId": "holographic",
+    "orderedWidthIn": 4,
+    "orderedHeightIn": 4,
+    "targetPpi": 310,
+    "bleedWidthIn": 0.14,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": false,
+    "minTextPt": null,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "white-ink"
+    ],
+    "expectedWarnings": [],
+    "kind": "pdf"
+  },
+  {
+    "file": "white-005.pdf",
+    "productId": "clear",
+    "orderedWidthIn": 3,
+    "orderedHeightIn": 3,
+    "targetPpi": 150,
+    "bleedWidthIn": 0.16,
+    "cutContourInPdf": true,
+    "whiteInkInPdf": false,
+    "minTextPt": null,
+    "colorMode": null,
+    "hasTransparency": null,
+    "expectedVerdict": "SOFT-FAIL",
+    "expectedFails": [
+      "low-ppi",
+      "white-ink"
+    ],
+    "expectedWarnings": [],
+    "kind": "pdf"
   }
 ]

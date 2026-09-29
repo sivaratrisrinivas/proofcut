@@ -14,19 +14,21 @@ interface ExtItem {
   expectedWarnings: string[];
 }
 
-const EXT_DIR = join(import.meta.dir, "..", "corpus-ext");
+const L2_DIR = join(import.meta.dir, "..", "corpus-l2-content");
 
 describe("extensions harness (pdf cutcontour + white-ink)", () => {
   test("10-file pdf corpus verdicts correctly", async () => {
-    const manifestFile = Bun.file(join(EXT_DIR, "manifest.json"));
+    const manifestFile = Bun.file(join(L2_DIR, "manifest.json"));
     expect(await manifestFile.exists()).toBe(true);
-    const items = (await manifestFile.json()) as ExtItem[];
+    const items = ((await manifestFile.json()) as (ExtItem & { kind: string })[]).filter(
+      (it) => it.kind === "pdf",
+    );
     expect(items.length).toBe(10);
 
     let correct = 0;
     for (const it of items) {
       const r = await preflightFile(
-        join(EXT_DIR, it.file),
+        join(L2_DIR, it.file),
         { widthIn: it.orderedWidthIn, heightIn: it.orderedHeightIn },
         it.productId,
       );

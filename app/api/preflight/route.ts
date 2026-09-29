@@ -6,7 +6,7 @@ import { listSpecs } from "../../../src/specs";
 
 const ROOT = process.cwd();
 const CORPUS_DIR = join(ROOT, "corpus");
-const EXT_DIR = join(ROOT, "corpus-ext");
+const L2_DIR = join(ROOT, "corpus-l2-content");
 
 export async function GET() {
   let demoFiles: string[] = [];
@@ -26,7 +26,7 @@ function safeName(raw: string): string {
 
 async function demoPanel(name: string, ordered: { widthIn: number; heightIn: number }, productId: string) {
   const file = safeName(name);
-  const dir = file.toLowerCase().endsWith(".pdf") ? EXT_DIR : CORPUS_DIR;
+  const dir = file.toLowerCase().endsWith(".pdf") ? L2_DIR : CORPUS_DIR;
   const resolved = join(dir, file);
   if (!resolved.startsWith(dir)) throw new Error("unsupported demo file");
   const bytes = await readFile(resolved);
