@@ -1,4 +1,4 @@
-import { deflateSync } from "node:zlib";
+import { deflateSync, inflateSync } from "node:zlib";
 
 const PNG_SIG = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 
@@ -70,4 +70,125 @@ export function readPngDims(buf: Buffer | Uint8Array): { width: number; height: 
     throw new Error("not a png: bad IHDR dims");
   }
   return { width, height };
+}
+
+export interface DecodedPng {
+  width: number;
+  height: number;
+  channels: 3 | 4;
+  pixels: Buffer;
+}
+
+function paethPredictor(a: number, b: number, c: number): number {
+  const p = a + b - c;
+  const pa = Math.abs(p - a);
+  const pb = Math.abs(p - b);
+  const pc = Math.abs(p - c);
+  return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
+}
+
+export function decodePng(buf: Buffer | Uint8Array): DecodedPng {
+  const b = Buffer.from(buf);
+  if (b.length < 8 || !b.subarray(0, 8).equals(PNG_SIG)) {
+    throw new Error("not a png: bad signature");
+  }
+  let pos = 8;
+  let width = 0;
+  let height = 0;
+  let colorType = 0;
+  let bitDepth = 0;
+  let seenIhdr = false;
+  const idat: Buffer[] = [];
+  while (pos + 8 <= b.length) {
+    const len = b.readUInt32BE(pos);
+    const type = b.toString("ascii", pos + 4, pos + 8);
+    if (pos + 12 + len > b.length) throw new Error("not a png: truncated chunk");
+    const data = b.subarray(pos + 8, pos + 8 + len);
+    if (type === "IHDR") {
+      seenIhdr = true;
+      width = data.readUInt32BE(0);
+      height = data.readUInt32BE(4);
+      bitDepth = data[8];
+      colorType = data[9];
+      if (bitDepth !== 8 || (colorType !== 2 && colorType !== 6)) {
+        throw new Error(`unsupported png: bitDepth=${bitDepth} colorType=${colorType} (only 8-bit RGB/RGBA)`);
+      }
+      if (data[12] !== 0) {
+        throw new Error("unsupported png: interlaced (only non-interlaced)");
+      }
+      if (width <= 0 || height <= 0) throw new Error("not a png: bad IHDR dims");
+    } else if (type === "IDAT") {
+      idat.push(Buffer.from(data));
+    } else if (type === "IEND") {
+      break;
+    }
+    pos += 12 + len;
+  }
+  if (!seenIhdr) throw new Error("not a png: missing IHDR");
+  if (idat.length === 0) throw new Error("not a png: missing IDAT");
+  const channels: 3 | 4 = colorType === 2 ? 3 : 4;
+  const stride = width * channels;
+  let raw: Buffer;
+  try {
+    raw = Buffer.from(inflateSync(Buffer.concat(idat)));
+  } catch {
+    throw new Error("not a png: IDAT inflate failed");
+  }
+  if (raw.length !== (stride + 1) * height) {
+    throw new Error("not a png: IDAT size mismatch");
+  }
+  const pixels = Buffer.alloc(stride * height);
+  let cursor = 0;
+  for (let y = 0; y < height; y++) {
+    const filter = raw[cursor++];
+    if (filter > 4) throw new Error(`not a png: bad filter ${filter} on row ${y}`);
+    for (let x = 0; x < stride; x++) {
+      const left = x >= channels ? pixels[y * stride + x - channels] : 0;
+      const up = y > 0 ? pixels[(y - 1) * stride + x] : 0;
+      const upLeft = x >= channels && y > 0 ? pixels[(y - 1) * stride + x - channels] : 0;
+      const v = raw[cursor++];
+      pixels[y * stride + x] =
+        filter === 0 ? v
+        : filter === 1 ? (v + left) & 255
+        : filter === 2 ? (v + up) & 255
+        : filter === 3 ? (v + ((left + up) >> 1)) & 255
+        : (v + paethPredictor(left, up, upLeft)) & 255;
+    }
+  }
+  return { width, height, channels, pixels };
+}
+
+const NEAR_WHITE = 250;
+
+function isWhitePixel(r: number, g: number, b: number): boolean {
+  return r >= NEAR_WHITE && g >= NEAR_WHITE && b >= NEAR_WHITE;
+}
+
+export function measureWhiteEdgeDepth(decoded: DecodedPng): number {
+  const { width, height, channels, pixels } = decoded;
+  let depth = 0;
+  outer: for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const off = y * width * channels + x * channels;
+      if (!isWhitePixel(pixels[off], pixels[off + 1], pixels[off + 2])) break outer;
+    }
+    depth++;
+  }
+  return depth;
+}
+
+export function countPureBlackPixels(decoded: DecodedPng): number {
+  let n = 0;
+  for (let off = 0; off < decoded.pixels.length; off += decoded.channels) {
+    if (decoded.pixels[off] === 0 && decoded.pixels[off + 1] === 0 && decoded.pixels[off + 2] === 0) n++;
+  }
+  return n;
+}
+
+export function hasTransparency(decoded: DecodedPng): boolean {
+  if (decoded.channels !== 4) return false;
+  for (let off = 3; off < decoded.pixels.length; off += 4) {
+    if (decoded.pixels[off] < NEAR_WHITE) return true;
+  }
+  return false;
 }
