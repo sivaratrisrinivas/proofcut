@@ -29,6 +29,11 @@ const shell: React.CSSProperties = {
   background: "#fff",
 };
 
+const wideShell: React.CSSProperties = {
+  ...shell,
+  maxWidth: 1280,
+};
+
 const primaryBtn: React.CSSProperties = {
   display: "block",
   width: "100%",
@@ -58,6 +63,19 @@ const inputStyle: React.CSSProperties = {
 };
 
 const quietLink: React.CSSProperties = { color: faint, fontSize: 14, textDecoration: "none" };
+
+function verdictPill(verdict: "PASS" | "SOFT-FAIL"): React.CSSProperties {
+  const pass = verdict === "PASS";
+  return {
+    fontSize: 11,
+    fontWeight: 700,
+    padding: "2px 8px",
+    borderRadius: 999,
+    background: pass ? "#e6f4ea" : "#fef3c7",
+    color: pass ? "#137333" : "#92400e",
+    whiteSpace: "nowrap",
+  };
+}
 
 interface DraftView {
   overlay: { cutline: { visible: boolean }; bleed: { visible: boolean; widthIn: number } };
@@ -408,7 +426,7 @@ export default function ReviewLoop() {
   }
 
   return (
-    <div style={shell}>
+    <div style={view === "loop" ? wideShell : shell}>
       <header style={{ display: "flex", alignItems: "baseline", marginBottom: 32 }}>
         <span style={{ fontSize: 13, fontWeight: 700 }}>ProofPilot</span>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 16 }}>
@@ -660,7 +678,43 @@ export default function ReviewLoop() {
         </div>
       ) : null}
 
-      {view === "loop" && loopScreen === "upnext" ? (
+      {view === "loop" ? (
+        <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 32, alignItems: "start" }}>
+          <aside aria-label="Review queue">
+            <p style={{ color: faint, fontSize: 13, fontWeight: 700, margin: "0 0 8px" }}>
+              QUEUE · {decidedCount} OF {queue.length} DONE
+            </p>
+            <div style={{ display: "grid", gap: 8 }}>
+              {queue.map((q) => {
+                const d = decided[q.id];
+                const selected = jobId === q.id && loopScreen === "decide";
+                return (
+                  <button
+                    key={q.id}
+                    type="button"
+                    onClick={() => start(q.id)}
+                    style={{
+                      display: "block", width: "100%", textAlign: "left", cursor: "pointer",
+                      background: "#fff", borderRadius: 10, padding: "10px 12px",
+                      border: selected ? "2px solid #111" : "1px solid #e5e5e5",
+                    }}
+                  >
+                    <span style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
+                      <strong style={{ fontSize: 14 }}>{q.id}</strong>
+                      <span style={verdictPill(q.result.verdict)}>{q.result.verdict}</span>
+                    </span>
+                    <span style={{ display: "block", fontSize: 12, color: faint, marginTop: 4 }}>
+                      {q.productId} · {Math.round(q.result.measurements.ppi)} PPI
+                      {upNext?.id === q.id && !d ? " · up next" : ""}
+                      {d ? ` · ✓ ${d}` : ""}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </aside>
+          <div>
+            {loopScreen === "upnext" ? (
         <div>
           {flash ? <p style={{ color: accent, fontWeight: 600 }}>{flash}</p> : null}
           {!upNext ? (
@@ -774,6 +828,9 @@ export default function ReviewLoop() {
               {reviewError ? <p role="alert">Error: {reviewError}</p> : null}
             </div>
           )}
+        </div>
+      ) : null}
+          </div>
         </div>
       ) : null}
     </div>
