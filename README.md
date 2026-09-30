@@ -2,10 +2,27 @@
 
 https://proofcut.vercel.app
 
-File in, measured verdict out, one decision action.
-Pick a file, run preflight, press Approve and send or Send fix note.
+## What
 
-## Quickstart
+ProofPilot checks one print file before an artist touches it.
+You pick a PNG or PDF, enter the ordered size, and pick the product.
+The app measures the file and returns a verdict: PASS or SOFT-FAIL.
+PASS means the file is clean, so you press Approve and send.
+SOFT-FAIL lists each miss with its measured number, so you press Send fix
+note or escalate to support. Your decision stays on your machine.
+
+## Why
+
+Every upload used to wait until an artist opened it, read it, and typed a
+fix note. That took 10 to 25 minutes per file, and most files failed on a
+simple measurable fault: low resolution, missing bleed, or no cut line.
+Measuring those faults in code takes under a second, so the artist only
+sees the exceptions. The app keeps one path on purpose. Login screens,
+queues, and dashboards never measured anything, so they were cut.
+
+## How it works
+
+Run steps that copy paste:
 
 ```sh
 bun install
@@ -14,13 +31,15 @@ bun run dev
 bun run build
 ```
 
-## How it works
-
-src/preflight.ts is the pure function: file plus ordered size plus product
-spec in, pass plus fails plus measurements out. src/draft.ts draws the
-checklist, preview overlays, and message. src/wording.ts, src/queue.ts,
-and src/audit.ts are thin adapters around it. The page calls /api/preflight
-and decides locally, with no account and no queue.
+src/preflight.ts is the pure function at the center. File plus ordered size
+plus product spec go in, and pass plus fails plus measurements come out.
+For PNG files the app decodes the pixels and measures bleed width, RGB-black
+blocks, and transparency straight from the image. Text height, cut line, and
+white ink still come from a sidecar file because pixels do not carry that
+signal yet. src/draft.ts turns the result into a checklist, preview overlays,
+and a fix message. src/wording.ts, src/queue.ts, and src/audit.ts are thin
+adapters around the same result. The page calls /api/preflight, shows the
+table, and records your decision locally, with no account and no queue.
 
 ## Corpus
 
