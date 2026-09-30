@@ -7,6 +7,28 @@ for a 3 to 5 minute artist review. Touches fall from 3 to 1. Only a
 high-confidence PASS can auto-send, and it writes an audit log. The system
 never charges, reprints, or scraps on its own.
 
+## What this is now
+
+One screen, no login. You pick a file, run preflight, read the verdict, and
+press one button. That is the whole app.
+
+## Why
+
+The app used to have a demo login, a job queue, a stepped upload wizard, and
+a dashboard with ROI sliders. Each of those asked you to learn something
+before you could check a proof. None of them measured anything. I cut them.
+What is left is the one path a person actually walks: file in, numbers out,
+decision made.
+
+## How
+
+Pick a PNG or PDF (or a demo file), enter the ordered size, pick the product,
+and press Run preflight. The app measures the file and shows a verdict. PASS
+means the file is clean, so you press Approve and send. SOFT-FAIL lists each
+miss with its measured number, so you press Send fix note or escalate to
+support. Your decision stays on your machine. There is no account, no queue,
+and no second user.
+
 ## Quickstart
 
 ```sh
