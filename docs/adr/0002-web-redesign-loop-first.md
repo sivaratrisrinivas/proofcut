@@ -1,5 +1,8 @@
 # Web redesign: desktop Loop-first, constraint relaxed per view
 
+SUPERSEDED by ADR-0003 (2026-09-30): single login-free workflow replaced the
+Loop desk wholesale. Kept as history.
+
 Grill-with-docs round 2 (2026-09-30) settled: the 560px centered-column skin
 reads as a mobile app; redesign for desktop web. Loop is the design driver,
 then propagate to New/Insights. Loop goes side-by-side (queue + job detail);

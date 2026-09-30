@@ -80,15 +80,14 @@ reprints of addressable spend, with only 20 to 25 percent captured in year one.
 
 Five-file path, end to end in seconds: approve 2 clean, send 3 fix notes.
 Before and after is 3 touches to 1, 20 minutes to 4. Timed 3-minute narration
-lives in `docs/demo-script.md`: pain (72dpi 3in die-cut) to flagged queue to
-dashed magenta cut-line plus bleed overlays to before/after to ROI sliders to
-the production path.
+lives in `docs/demo-script.md`: pain (72dpi 3in die-cut) to flagged file to
+dashed magenta cut-line plus bleed overlays to before/after to the decision.
 
 ## Production path
 
 Guru (spec DB) to RIP to Reply runs in shadow mode behind the prototype: the
 static JSON specs stand in for Guru, imposition and RIP and order and Reply
-calls are mocked, and one demo login stands in for auth. Per ADR-0001 the
+calls are mocked, and there is no login: one user, one proof, one decision. Per ADR-0001 the
 prototype loop is Bun plus TypeScript plus Next.js on Vercel; Vercel prod runs
 Node, and a full Bun server with Go plus Postgres alignment waits for the
 production track.
@@ -96,10 +95,8 @@ production track.
 ## Public link
 
 Status: live at **https://proofcut.vercel.app** (production deploy on Vercel
-per ADR-0001, zero-config Next.js). It serves the full demo: single demo login
-(`Continue as demo-artist`, no password, per `src/demoAuth.ts`), the
-one-job-at-a-time review loop (Up next to Decide, verdict-routed, over
-`src/loop.ts`), a stepped New-proof flow, and read-only Insights. Redeploy
+per ADR-0001, zero-config Next.js). It serves the single workflow: pick a file,
+run preflight, read the measured verdict, and press the one decision action. Redeploy
 with `vercel --prod` from the repo root; the next deploy refreshes the link.
 Local fallback: `bun run dev` (then open the printed localhost URL); `bun test`
 still proves the preflight gate.

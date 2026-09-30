@@ -1,23 +1,45 @@
 import { describe, expect, test } from "bun:test";
-import { DEMO_SESSION_KEY, DEMO_USER, createDemoSession, isDemoSession } from "../src/demoAuth";
+import { join } from "node:path";
 
-describe("ticket 10: single demo login stands in for auth", () => {
-  test("demo user is a fixed single identity with no password", () => {
-    expect(DEMO_USER).toBe("demo-artist");
-    expect(createDemoSession()).toBe(DEMO_USER);
+// Ticket 02 (web-redesign): single user, single workflow, nothing more.
+// The demo login is gone; this test pins its absence and the one workflow.
+describe("single user, single workflow", () => {
+  test("no login, no session, no second user in the UI", async () => {
+    const source = await Bun.file(join(import.meta.dir, "..", "app", "page.tsx")).text();
+    for (const needle of [
+      "demoAuth",
+      "DEMO_USER",
+      "DEMO_ACTOR",
+      "DEMO_SESSION_KEY",
+      "Continue as",
+      "localStorage",
+      "/api/queue",
+      "/api/metrics",
+      "/api/review",
+      "MetricCard",
+      "ROI_SLIDERS",
+      "Insights",
+      "Review queue",
+      "AuditEntry",
+      "audit log",
+      "Auto-send",
+    ]) {
+      expect(source.includes(needle), `page must not contain ${needle}`).toBe(false);
+    }
+    expect(await Bun.file(join(import.meta.dir, "..", "src", "demoAuth.ts")).exists()).toBe(false);
   });
 
-  test("session check accepts only the demo identity", () => {
-    expect(isDemoSession(DEMO_USER)).toBe(true);
-    expect(isDemoSession("")).toBe(false);
-    expect(isDemoSession(null)).toBe(false);
-    expect(isDemoSession(undefined)).toBe(false);
-    expect(isDemoSession("admin")).toBe(false);
-    expect(isDemoSession(" demo-artist ")).toBe(false);
-  });
-
-  test("session key is stable for persistence", () => {
-    expect(typeof DEMO_SESSION_KEY).toBe("string");
-    expect(DEMO_SESSION_KEY.length).toBeGreaterThan(0);
+  test("one workflow: inputs plus run plus one decision action", async () => {
+    const source = await Bun.file(join(import.meta.dir, "..", "app", "page.tsx")).text();
+    for (const needle of [
+      "Run preflight",
+      "Approve &amp; send",
+      "Send fix note",
+      "Escalate to support",
+      "/api/preflight",
+      "/api/demo-image",
+    ]) {
+      expect(source.includes(needle), `page must contain ${needle}`).toBe(true);
+    }
   });
 });
