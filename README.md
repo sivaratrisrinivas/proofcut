@@ -1,95 +1,33 @@
 # ProofPilot (proofcut prototype)
 
-Preflight every upload in under 30 seconds and draft the proof so artists
-handle only the exceptions. About 60 percent pass clean and auto-draft; the
-rest are flagged with a marked preview, a short fix list, and a customer note
-for a 3 to 5 minute artist review. Touches fall from 3 to 1. Only a
-high-confidence PASS can auto-send, and it writes an audit log. The system
-never charges, reprints, or scraps on its own.
+https://proofcut.vercel.app
 
-## What this is now
-
-One screen, no login. You pick a file, run preflight, read the verdict, and
-press one button. That is the whole app.
-
-## Why
-
-The app used to have a demo login, a job queue, a stepped upload wizard, and
-a dashboard with ROI sliders. Each of those asked you to learn something
-before you could check a proof. None of them measured anything. I cut them.
-What is left is the one path a person actually walks: file in, numbers out,
-decision made.
-
-## How
-
-Pick a PNG or PDF (or a demo file), enter the ordered size, pick the product,
-and press Run preflight. The app measures the file and shows a verdict. PASS
-means the file is clean, so you press Approve and send. SOFT-FAIL lists each
-miss with its measured number, so you press Send fix note or escalate to
-support. Your decision stays on your machine. There is no account, no queue,
-and no second user.
+File in, measured verdict out, one decision action.
+Pick a file, run preflight, press Approve and send or Send fix note.
 
 ## Quickstart
 
 ```sh
 bun install
 bun test
+bun run dev
 bun run build
-bun scripts/generate-corpus.ts
 ```
 
 ## How it works
 
-The tested seam is one pure function: file plus ordered size plus product spec
-in, pass plus fails plus measurements out (`src/preflight.ts`, thin
-`src/preflightFile.ts` adapter). On top sit thin adapters: drafter
-(`src/draft.ts`), wording (`src/wording.ts`), queue and audit store
-(`src/queue.ts`, `src/audit.ts`), metrics and ROI (`src/metrics.ts`,
-`src/roi.ts`).
+src/preflight.ts is the pure function: file plus ordered size plus product
+spec in, pass plus fails plus measurements out. src/draft.ts draws the
+checklist, preview overlays, and message. src/wording.ts, src/queue.ts,
+and src/audit.ts are thin adapters around it. The page calls /api/preflight
+and decides locally, with no account and no queue.
 
-## System architecture
+## Corpus
 
-One request path, measured end to end:
-
-```mermaid
-flowchart LR
-    user[Person] --> page[Single screen\napp/page.tsx]
-    page -->|POST file + size + product| preflightApi[/api/preflight/]
-    preflightApi --> panel[Panel rows\nsrc/upload.ts]
-    preflightApi --> measure[preflightFile\nsrc/preflightFile.ts]
-    measure -->|PNG pixels| seam[pure PNG seam\nsrc/png.ts]
-    measure -->|PDF bytes| pdfscan[spot search\nsrc/pdf.ts]
-    measure --> core[pure verdict\nsrc/preflight.ts]
-    core --> specs[product rules\nspecs/products.json]
-    core --> page
-    page --> draft[checklist + message\nsrc/draft.ts]
-    page --> decide[Local decision\nno account, no POST]
-```
-
-Where things live:
-
-```text
-app/
-├── page.tsx              # the whole UI: inputs, result, one decision
-└── api/
-    ├── preflight/        # GET specs + demo list, POST measure
-    └── demo-image/       # serves preview bytes
-src/
-├── preflight.ts          # pure verdict core (tested seam)
-├── preflightFile.ts      # file adapter: pixels + sidecar
-├── preflightContent.ts   # pixel facts from the PNG seam
-├── png.ts                # PNG decode + encode
-├── pdf.ts                # PDF spot + dims search
-├── upload.ts             # panel rows with per-row sources
-├── draft.ts              # checklist, message, overlays, tone lint
-├── wording.ts            # explain + rebuild prompts
-├── specs.ts              # static product rules (stand-in DB)
-└── queue/audit/review/metrics/roi/loop # engine: tested, not wired to UI
-corpus/                    # L1: 60 files, frozen gate
-corpus-l2-content/         # L2: 42 files + manifest + messages + labels
-specs/products.json        # the five products and their rules
-evals/                     # wording judge prompt, splits, validation report
-```
+L1 is 60 flat files for geometry, including 72dpi low-resolution cases.
+L2 is 42 art files across die cut, clear, holographic, roll label, and tape.
+Text height, cut line, and white ink stay sidecar because pixels do not carry that signal yet.
+The preview draws the cut line as a dashed magenta overlay.
 
 ## Thresholds (frozen for the D2 harness)
 
@@ -107,13 +45,14 @@ auto-send with an audit log entry. SOFT-FAIL needs artist review with a marked
 preview and never auto-sends. A 50dpi adversarial file never passes, and every
 measurement stays within 2 percent of ground truth.
 
-## Wording layer (two prompts only)
+## Evals
 
-`src/wording.ts` holds the only two prompts: `explain` (one named line per
-fail, rewording code-measured numbers) and `rebuild` (one rebuild step per
-fail). Both return a confidence (high on PASS, medium on a single fail, low on
-multiple) and always wait for approve (`needsApprove: true`). No fine-tune, no
-swarm. Tone lint keeps banned words at zero, so notes stay concise and named.
+The judge checks that wording numbers match code measurements.
+Dev has 16 cases. Test has 14 cases. Both scored 100 percent.
+Limits, kept: small n, so the true rate could sit lower.
+One annotator wrote the labels and the fail cases.
+The fail cases are synthetic near-misses, not wild failures.
+All 36 natural code outputs passed, which is why mates were built.
 
 ## ROI formula plus assumptions
 
@@ -137,38 +76,16 @@ All inputs are assumed, never company facts:
 | Reprint percent | 2% | 1 to 3% at $18 to $35 each |
 | Year-one capture | 22.5% | 20 to 25% |
 
-Weakest input, highlighted in the dashboard: orders per month (monthly proof
-volume). Confirm it with the company before quoting anything with confidence.
-At defaults the model lands near $280k to $1.1M labor plus $180k to $900k
-reprints of addressable spend, with only 20 to 25 percent captured in year one.
-
-## Demo
-
-Five-file path, end to end in seconds: approve 2 clean, send 3 fix notes.
-Before and after is 3 touches to 1, 20 minutes to 4. Timed 3-minute narration
-lives in `docs/demo-script.md`: pain (72dpi 3in die-cut) to flagged file to
-dashed magenta cut-line plus bleed overlays to before/after to the decision.
-
-## Production path
-
-Guru (spec DB) to RIP to Reply runs in shadow mode behind the prototype: the
-static JSON specs stand in for Guru, imposition and RIP and order and Reply
-calls are mocked, and there is no login: one user, one proof, one decision. Per ADR-0001 the
-prototype loop is Bun plus TypeScript plus Next.js on Vercel; Vercel prod runs
-Node, and a full Bun server with Go plus Postgres alignment waits for the
-production track.
-
-## Public link
-
-Status: live at **https://proofcut.vercel.app** (production deploy on Vercel
-per ADR-0001, zero-config Next.js). It serves the single workflow: pick a file,
-run preflight, read the measured verdict, and press the one decision action. Redeploy
-with `vercel --prod` from the repo root; the next deploy refreshes the link.
-Local fallback: `bun run dev` (then open the printed localhost URL); `bun test`
-still proves the preflight gate.
+Weakest input: orders per month (monthly proof volume).
+Confirm it with the company before quoting anything with confidence.
 
 ## Guards
 
 Accuracy 90 percent or better, hold rate under 40 percent, preflight p95 under
 30 seconds, measurements within 2 percent, zero banned words, 50dpi
 adversarial never passes, every auto-send and decision in the audit log.
+
+## What is faked
+
+Static JSON stands in for Guru. Order and Reply calls are mocked, and RIP
+runs in shadow mode. One user, no queue.
