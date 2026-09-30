@@ -8,6 +8,7 @@
     "generate:ext": "bun scripts/generate-extensions-corpus.ts",
     "generate:l2": "bun scripts/generate-l2-content.ts",
     "generate:l2-messages": "bun scripts/generate-l2-messages.ts",
+    "generate:wording-candidates": "bun scripts/generate-wording-candidates.ts",
     "test": "bun test",
     "harness": "bun test tests/corpus-harness.test.ts tests/l2-harness.test.ts",
     "check": "bunx tsc --noEmit",
