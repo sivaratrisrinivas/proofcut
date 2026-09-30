@@ -1,0 +1,228 @@
+{
+ "cut-002": {
+  "inputs": {
+   "fails": [
+    "cutline"
+   ],
+   "measured": {
+    "ppi": 300,
+    "bleedWidthIn": 0.15,
+    "pixelWidth": 900,
+    "pixelHeight": 900,
+    "minTextPt": null
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: cutline.",
+   "body": [
+    "cutline: CutContour path missing for die-cut. Add a CutContour spot path."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: cutline.",
+   "body": [
+    "cutline: CutContour path present but misnamed for die-cut. Rename the spot path."
+   ]
+  },
+  "fail_perturbation": "wrong-fact"
+ },
+ "cut-005": {
+  "inputs": {
+   "fails": [
+    "low-ppi"
+   ],
+   "measured": {
+    "ppi": 72,
+    "bleedWidthIn": 0.15,
+    "pixelWidth": 216,
+    "pixelHeight": 216,
+    "minTextPt": null
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: low-ppi.",
+   "body": [
+    "low-ppi: 72 PPI at ordered size, needs 300 PPI. Rebuild art at higher resolution."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: low-ppi.",
+   "body": [
+    "low-ppi: your PDF resolution is too low for print. Please resend at higher quality."
+   ]
+  },
+  "fail_perturbation": "vague"
+ },
+ "l2-012": {
+  "inputs": {
+   "fails": [
+    "tiny-text"
+   ],
+   "measured": {
+    "ppi": 300,
+    "bleedWidthIn": 0.125,
+    "pixelWidth": 900,
+    "pixelHeight": 900,
+    "minTextPt": 5
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: tiny-text.",
+   "body": [
+    "tiny-text: smallest text 5pt, minimum 6pt. Enlarge text to 6pt or more."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: tiny-text.",
+   "body": [
+    "tiny-text: smallest text 7pt, minimum 6pt. Enlarge text to 6pt or more."
+   ]
+  },
+  "fail_perturbation": "wrong-number"
+ },
+ "l2-018": {
+  "inputs": {
+   "fails": [
+    "low-ppi"
+   ],
+   "measured": {
+    "ppi": 150,
+    "bleedWidthIn": 0.125,
+    "pixelWidth": 300,
+    "pixelHeight": 300,
+    "minTextPt": null
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: low-ppi.",
+   "body": [
+    "low-ppi: 150 PPI at ordered size, needs 300 PPI. Rebuild art at higher resolution."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: low-ppi.",
+   "body": [
+    "low-ppi: 300 PPI at ordered size, needs 300 PPI. Rebuild art at higher resolution."
+   ]
+  },
+  "fail_perturbation": "wrong-number"
+ },
+ "l2-021": {
+  "inputs": {
+   "fails": [
+    "low-ppi"
+   ],
+   "measured": {
+    "ppi": 150,
+    "bleedWidthIn": 0.125,
+    "pixelWidth": 600,
+    "pixelHeight": 300,
+    "minTextPt": null
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: low-ppi.",
+   "body": [
+    "low-ppi: 150 PPI at ordered size, needs 300 PPI. Rebuild art at higher resolution."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: low-ppi.",
+   "body": [
+    "low-ppi: 250 PPI at ordered size, needs 300 PPI. Rebuild art at higher resolution."
+   ]
+  },
+  "fail_perturbation": "wrong-number"
+ },
+ "l2-028": {
+  "inputs": {
+   "fails": [
+    "white-ink"
+   ],
+   "measured": {
+    "ppi": 310,
+    "bleedWidthIn": 0.125,
+    "pixelWidth": 1240,
+    "pixelHeight": 1240,
+    "minTextPt": null
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: white-ink.",
+   "body": [
+    "white-ink: white underbase missing for holographic. Add a white ink layer under color areas."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: white-ink.",
+   "body": [
+    "white-ink: white underbase coverage 0% for holographic. Add a white ink layer under color areas."
+   ]
+  },
+  "fail_perturbation": "invented-number"
+ },
+ "l2-032": {
+  "inputs": {
+   "fails": [
+    "bleed"
+   ],
+   "measured": {
+    "ppi": 300,
+    "bleedWidthIn": 0.005,
+    "pixelWidth": 1200,
+    "pixelHeight": 600,
+    "minTextPt": 8
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: bleed.",
+   "body": [
+    "bleed: 0.005in past cut line, needs 0.125in. Extend art beyond the cut line."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: bleed.",
+   "body": [
+    "Unfortunately your bleed is only 0.005in past cut line, needs 0.125in. Extend art beyond the cut line."
+   ]
+  },
+  "fail_perturbation": "banned-tone"
+ },
+ "white-005": {
+  "inputs": {
+   "fails": [
+    "low-ppi",
+    "white-ink"
+   ],
+   "measured": {
+    "ppi": 150,
+    "bleedWidthIn": 0.16,
+    "pixelWidth": 450,
+    "pixelHeight": 450,
+    "minTextPt": null
+   },
+   "warnings": []
+  },
+  "pass": {
+   "headline": "Needs artist review: low-ppi, white-ink.",
+   "body": [
+    "low-ppi: 150 PPI at ordered size, needs 300 PPI. Rebuild art at higher resolution.",
+    "white-ink: white underbase missing for clear. Add a white ink layer under color areas."
+   ]
+  },
+  "fail": {
+   "headline": "Needs artist review: low-ppi.",
+   "body": [
+    "low-ppi: 150 PPI at ordered size, needs 300 PPI. Rebuild art at higher resolution."
+   ]
+  },
+  "fail_perturbation": "dropped-fail"
+ }
+}

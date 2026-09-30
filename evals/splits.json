@@ -1,0 +1,42 @@
+{
+ "train_jobs": [
+  "l2-005",
+  "l2-024",
+  "l2-017"
+ ],
+ "dev": [
+  "cut-002",
+  "cut-002",
+  "cut-005",
+  "cut-005",
+  "l2-012",
+  "l2-012",
+  "l2-018",
+  "l2-018",
+  "l2-021",
+  "l2-021",
+  "l2-028",
+  "l2-028",
+  "l2-032",
+  "l2-032",
+  "white-005",
+  "white-005"
+ ],
+ "test": [
+  "cut-004",
+  "cut-004",
+  "l2-006",
+  "l2-006",
+  "l2-015",
+  "l2-015",
+  "l2-020",
+  "l2-020",
+  "l2-026",
+  "l2-026",
+  "l2-030",
+  "l2-030",
+  "white-002",
+  "white-002"
+ ],
+ "note": "row-level explain units only; line/variant units are training-pool material, excluded from validation"
+}

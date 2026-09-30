@@ -1,0 +1,524 @@
+{
+ "l2-001": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-002": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 600,
+   "pixelHeight": 600,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-003": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 1200,
+   "pixelHeight": 1200,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-004": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 600,
+   "minTextPt": 8
+  },
+  "warnings": []
+ },
+ "l2-005": {
+  "fails": [
+   "bleed"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.025,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-006": {
+  "fails": [
+   "low-ppi",
+   "bleed"
+  ],
+  "measured": {
+   "ppi": 150,
+   "bleedWidthIn": 0.025,
+   "pixelWidth": 450,
+   "pixelHeight": 450,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-007": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-008": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": [
+   "rgb-black-auto-convert"
+  ]
+ },
+ "l2-009": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 1200,
+   "pixelHeight": 1200,
+   "minTextPt": null
+  },
+  "warnings": [
+   "rgb-black-auto-convert"
+  ]
+ },
+ "l2-010": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": [
+   "transparency-auto-convert"
+  ]
+ },
+ "l2-011": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-012": {
+  "fails": [
+   "tiny-text"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": 5
+  },
+  "warnings": []
+ },
+ "l2-013": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": 8
+  },
+  "warnings": []
+ },
+ "l2-014": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": 6
+  },
+  "warnings": []
+ },
+ "l2-015": {
+  "fails": [
+   "cutline"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-016": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-017": {
+  "fails": [
+   "low-ppi"
+  ],
+  "measured": {
+   "ppi": 72,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 216,
+   "pixelHeight": 216,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-018": {
+  "fails": [
+   "low-ppi"
+  ],
+  "measured": {
+   "ppi": 150,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 300,
+   "pixelHeight": 300,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-019": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 1200,
+   "pixelHeight": 600,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-020": {
+  "fails": [
+   "bleed"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.005,
+   "pixelWidth": 1200,
+   "pixelHeight": 600,
+   "minTextPt": 8
+  },
+  "warnings": []
+ },
+ "l2-021": {
+  "fails": [
+   "low-ppi"
+  ],
+  "measured": {
+   "ppi": 150,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 600,
+   "pixelHeight": 300,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-022": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 600,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-023": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 1200,
+   "pixelHeight": 1800,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-024": {
+  "fails": [
+   "bleed"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.025,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": [
+   "rgb-black-auto-convert"
+  ]
+ },
+ "l2-025": {
+  "fails": [
+   "bleed"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.025,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": [
+   "transparency-auto-convert"
+  ]
+ },
+ "l2-026": {
+  "fails": [
+   "white-ink"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-027": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-028": {
+  "fails": [
+   "white-ink"
+  ],
+  "measured": {
+   "ppi": 310,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 1240,
+   "pixelHeight": 1240,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-029": {
+  "fails": [],
+  "measured": {
+   "ppi": 310,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 1240,
+   "pixelHeight": 1240,
+   "minTextPt": null
+  },
+  "warnings": [
+   "transparency-auto-convert"
+  ]
+ },
+ "l2-030": {
+  "fails": [
+   "white-ink",
+   "tiny-text"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": 4.5
+  },
+  "warnings": []
+ },
+ "l2-031": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.125,
+   "pixelWidth": 1200,
+   "pixelHeight": 600,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "l2-032": {
+  "fails": [
+   "bleed"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.005,
+   "pixelWidth": 1200,
+   "pixelHeight": 600,
+   "minTextPt": 8
+  },
+  "warnings": []
+ },
+ "cut-001": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.15,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "cut-002": {
+  "fails": [
+   "cutline"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.15,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "cut-003": {
+  "fails": [],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.15,
+   "pixelWidth": 900,
+   "pixelHeight": 900,
+   "minTextPt": null
+  },
+  "warnings": [
+   "rgb-black-auto-convert"
+  ]
+ },
+ "cut-004": {
+  "fails": [
+   "white-ink"
+  ],
+  "measured": {
+   "ppi": 300,
+   "bleedWidthIn": 0.15,
+   "pixelWidth": 600,
+   "pixelHeight": 600,
+   "minTextPt": 8
+  },
+  "warnings": []
+ },
+ "cut-005": {
+  "fails": [
+   "low-ppi"
+  ],
+  "measured": {
+   "ppi": 72,
+   "bleedWidthIn": 0.15,
+   "pixelWidth": 216,
+   "pixelHeight": 216,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "white-001": {
+  "fails": [],
+  "measured": {
+   "ppi": 320,
+   "bleedWidthIn": 0.16,
+   "pixelWidth": 960,
+   "pixelHeight": 960,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "white-002": {
+  "fails": [
+   "white-ink",
+   "tiny-text"
+  ],
+  "measured": {
+   "ppi": 320,
+   "bleedWidthIn": 0.16,
+   "pixelWidth": 960,
+   "pixelHeight": 960,
+   "minTextPt": 4.5
+  },
+  "warnings": []
+ },
+ "white-003": {
+  "fails": [],
+  "measured": {
+   "ppi": 310,
+   "bleedWidthIn": 0.14,
+   "pixelWidth": 1240,
+   "pixelHeight": 1240,
+   "minTextPt": null
+  },
+  "warnings": [
+   "transparency-auto-convert"
+  ]
+ },
+ "white-004": {
+  "fails": [
+   "white-ink"
+  ],
+  "measured": {
+   "ppi": 310,
+   "bleedWidthIn": 0.14,
+   "pixelWidth": 1240,
+   "pixelHeight": 1240,
+   "minTextPt": null
+  },
+  "warnings": []
+ },
+ "white-005": {
+  "fails": [
+   "low-ppi",
+   "white-ink"
+  ],
+  "measured": {
+   "ppi": 150,
+   "bleedWidthIn": 0.16,
+   "pixelWidth": 450,
+   "pixelHeight": 450,
+   "minTextPt": null
+  },
+  "warnings": []
+ }
+}
