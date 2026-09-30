@@ -47,6 +47,50 @@ in, pass plus fails plus measurements out (`src/preflight.ts`, thin
 (`src/queue.ts`, `src/audit.ts`), metrics and ROI (`src/metrics.ts`,
 `src/roi.ts`).
 
+## System architecture
+
+One request path, measured end to end:
+
+```mermaid
+flowchart LR
+    user[Person] --> page[Single screen\napp/page.tsx]
+    page -->|POST file + size + product| preflightApi[/api/preflight/]
+    preflightApi --> panel[Panel rows\nsrc/upload.ts]
+    preflightApi --> measure[preflightFile\nsrc/preflightFile.ts]
+    measure -->|PNG pixels| seam[pure PNG seam\nsrc/png.ts]
+    measure -->|PDF bytes| pdfscan[spot search\nsrc/pdf.ts]
+    measure --> core[pure verdict\nsrc/preflight.ts]
+    core --> specs[product rules\nspecs/products.json]
+    core --> page
+    page --> draft[checklist + message\nsrc/draft.ts]
+    page --> decide[Local decision\nno account, no POST]
+```
+
+Where things live:
+
+```text
+app/
+├── page.tsx              # the whole UI: inputs, result, one decision
+└── api/
+    ├── preflight/        # GET specs + demo list, POST measure
+    └── demo-image/       # serves preview bytes
+src/
+├── preflight.ts          # pure verdict core (tested seam)
+├── preflightFile.ts      # file adapter: pixels + sidecar
+├── preflightContent.ts   # pixel facts from the PNG seam
+├── png.ts                # PNG decode + encode
+├── pdf.ts                # PDF spot + dims search
+├── upload.ts             # panel rows with per-row sources
+├── draft.ts              # checklist, message, overlays, tone lint
+├── wording.ts            # explain + rebuild prompts
+├── specs.ts              # static product rules (stand-in DB)
+└── queue/audit/review/metrics/roi/loop # engine: tested, not wired to UI
+corpus/                    # L1: 60 files, frozen gate
+corpus-l2-content/         # L2: 42 files + manifest + messages + labels
+specs/products.json        # the five products and their rules
+evals/                     # wording judge prompt, splits, validation report
+```
+
 ## Thresholds (frozen for the D2 harness)
 
 | Check | Pass | Soft-fail |
