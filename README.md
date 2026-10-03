@@ -2,6 +2,14 @@
 
 Live: https://proofcut.vercel.app
 
+## Demo (30 seconds)
+
+[![Watch the 30 second demo](docs/demo-poster.png)](https://github.com/sivaratrisrinivas/proofcut/blob/main/docs/demo.mp4)
+
+Click the image to open the video player. It shows a failing sample, a
+passing sample, a PNG upload, and the eval results. Direct download:
+[docs/demo.mp4](https://raw.githubusercontent.com/sivaratrisrinivas/proofcut/main/docs/demo.mp4).
+
 | Phone | Tablet | Desktop |
 | --- | --- | --- |
 | ![Phone, 390px](docs/screenshots/mobile.png) | ![Tablet, 768px](docs/screenshots/tablet.png) | ![Desktop, 1440px](docs/screenshots/desktop.png) |
