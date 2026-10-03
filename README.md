@@ -31,6 +31,7 @@ queues, and dashboards never measured anything, so they were cut.
 bun install
 bun test          # 233 tests: preflight core, both corpora, API routes, PNG decoder
 bun run check     # TypeScript
+bun run eval      # preflight eval, see Eval results
 bun run dev       # http://localhost:3000
 bun run build && bun run start
 bun run e2e http://localhost:3000   # browser check at 360, 390, 768, 1024, 1440px
@@ -123,7 +124,85 @@ auto-send with an audit log entry. SOFT-FAIL needs artist review with a marked
 preview and never auto-sends. A 50dpi adversarial file never passes, and every
 measurement stays within 2 percent of ground truth.
 
-## Evals
+## Eval results
+
+`bun run eval` runs every file with a known answer through preflightFile,
+the same code the web app uses, and compares the verdict, the fail list
+and the warnings with the answer. Full tables and every miss are in
+[evals/preflight-results.md](evals/preflight-results.md).
+
+Three sets:
+
+- L1 and L2 (102 files): the corpus in Data above. The thresholds were set
+  on these files, so they are dev data, not proof.
+- Fresh (226 files, held out): made by scripts/eval/generate_fresh.py, a
+  separate Python script that never imports ProofPilot code. It writes 204
+  PNGs (17 fault types, 12 each, mixed over the 5 products, 7 sizes, 72 to
+  360 PPI, and 6 PNG encodings) and 22 PDFs with different spot color names,
+  plain or packed in a compressed object stream. Each answer comes from how
+  the file was built and the thresholds below. No check was changed after
+  seeing these results.
+
+A SOFT-FAIL is a positive: TPR is the share of bad files caught, TNR the
+share of good files let through. Brackets are 95% ranges.
+
+| Set | Files | Verdict right | Exact match | TPR (bad caught) | TNR (good passed) | TP | FN | FP | TN |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| L1 (dev) | 60 | 100% | 100% | 22/22 | 38/38 | 22 | 0 | 0 | 38 |
+| L2 (dev) | 42 | 100% | 100% | 20/20 | 22/22 | 20 | 0 | 0 | 22 |
+| Fresh (held out) | 226 | 77.0% | 61.9% | 76.6% (118/154) [69 to 83] | 77.8% (56/72) [67 to 86] | 118 | 36 | 16 | 56 |
+
+Per check on the fresh set:
+
+| Check | Caught | No false alarm |
+| --- | --- | --- |
+| Resolution | 55/55 | 171/171 |
+| Size and shape | 12/12 | 214/214 |
+| Smallest text | 12/12 | 214/214 |
+| Cut line | 14/14 | 201/212 |
+| White ink | 14/14 | 204/212 |
+| Bleed | 24/60 (40%) | 154/166 |
+| RGB black warning | 12/24 | 202/202 |
+| Transparency warning | 12/24 | 202/202 |
+
+What the misses have in common, read one by one:
+
+1. Bleed only looks at the top edge (36 missed files). A white paper
+   margin at the bottom, left or right passes. Top margins and margins on
+   all four sides are all caught.
+2. White art at the top edge counts as missing bleed (12 files, 3 wrong
+   verdicts). A design with a white sky band that runs off the top edge
+   is flagged, because white pixels look the same as bare paper.
+3. Spot colors packed in a compressed object stream are not seen (10 of
+   11 PDFs). Illustrator and InDesign save this way by default, so a
+   correct file gets a false "no cut line" or "no white ink".
+4. Spot color names the text match does not know (4 plain PDFs): the escaped
+   name /Cut#43ontour (the same name as /CutContour), and /White_Ink,
+   /Spot#20White and /RDG_WHITE for white ink.
+5. Near black is not flagged as RGB black (12 files). Only exact 0,0,0
+   counts, so 2,2,2 to 8,8,8 get no warning. This never changes a verdict.
+6. Faint transparency is not flagged (12 files). Alpha 250 to 254 is
+   treated as solid. This never changes a verdict either.
+
+In plain words: resolution, size, text, missing cut lines and missing
+white ink were right on every fresh file. Bleed is the weak check, and
+real PDFs from design apps can get false fails. Product made little
+difference: verdicts were 72 to 90 percent right for every product.
+These are synthetic files, so they test the rules, not real customer art.
+
+Rerun:
+
+```sh
+bun run eval          # print tables, write evals/preflight-results.md and .json
+bun run eval:check    # fail if any set scores below evals/preflight-baseline.json
+bun run eval:fresh    # rebuild the fresh set (needs Python 3, Pillow, NumPy)
+```
+
+The Vercel build runs `bun test`, then `bun run eval:check`, then the
+build, so a change that drops a score does not deploy. After a real fix,
+run `bun scripts/eval/run.ts --baseline` to raise the bar.
+
+### Wording judge
 
 The judge checks that wording numbers match code measurements.
 Dev has 16 cases. Test has 14 cases. Both scored 100 percent.
