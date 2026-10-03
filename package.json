@@ -13,13 +13,16 @@
     "harness": "bun test tests/corpus-harness.test.ts tests/l2-harness.test.ts",
     "check": "bunx tsc --noEmit",
     "build": "next build",
-    "dev": "next dev"
+    "dev": "next dev",
+    "start": "next start",
+    "e2e": "bun e2e/responsive.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^26.6.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "playwright-core": "1.63.0",
     "typescript": "^5.6.0"
   },
   "dependencies": {

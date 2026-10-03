@@ -182,9 +182,9 @@ describe("01 decoder seam", () => {
   test("rejects bad signature and unsupported color type", () => {
     expect(() => decodePng(Buffer.from("not a png"))).toThrow();
     const gray = encodeFilter0(4, 4, () => [10, 20, 30, 255], 2);
-    // Corrupt IHDR color type byte (offset 16+9=25) to grayscale 0.
+    // Corrupt IHDR color type byte (offset 16+9=25) to 5, which the PNG spec does not define.
     const bad = Buffer.from(gray);
-    bad[25] = 0;
+    bad[25] = 5;
     expect(() => decodePng(bad)).toThrow();
   });
 
