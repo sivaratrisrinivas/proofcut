@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { samplePath } from "../../../src/samplePath";
 import { findSample, listSamples } from "../../../src/catalog";
 import { preflightSample, preflightUpload } from "../../../src/upload";
 import { listSpecs } from "../../../src/specs";
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     if (typeof sampleName === "string" && sampleName.length > 0) {
       const sample = findSample(sampleName);
       if (!sample) return bad("Unknown sample file.");
-      const path = join(process.cwd(), sample.dir, sample.file);
+      const path = samplePath(sample);
       const [bytes, sidecarText] = await Promise.all([readFile(path), readFile(`${path}.sidecar.json`, "utf8")]);
       const panel = preflightSample(bytes, sample.file, JSON.parse(sidecarText), ordered, productId);
       const sameOrder =
