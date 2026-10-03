@@ -1,0 +1,17 @@
+{
+ "fresh": {
+  "n": 226,
+  "verdictCorrect": 174,
+  "exact": 140
+ },
+ "L1": {
+  "n": 60,
+  "verdictCorrect": 60,
+  "exact": 60
+ },
+ "L2": {
+  "n": 42,
+  "verdictCorrect": 42,
+  "exact": 42
+ }
+}

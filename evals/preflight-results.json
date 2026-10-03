@@ -1,0 +1,2150 @@
+{
+ "scores": {
+  "fresh": {
+   "n": 226,
+   "verdictCorrect": 174,
+   "exact": 140
+  },
+  "L1": {
+   "n": 60,
+   "verdictCorrect": 60,
+   "exact": 60
+  },
+  "L2": {
+   "n": 42,
+   "verdictCorrect": 42,
+   "exact": 42
+  }
+ },
+ "sets": {
+  "fresh": {
+   "n": 226,
+   "verdictCorrect": 174,
+   "exact": 140,
+   "errors": 0,
+   "verdict": {
+    "tp": 118,
+    "fn": 36,
+    "fp": 16,
+    "tn": 56
+   },
+   "checks": [
+    {
+     "check": "low-ppi",
+     "tp": 55,
+     "fn": 0,
+     "fp": 0,
+     "tn": 171
+    },
+    {
+     "check": "bleed",
+     "tp": 24,
+     "fn": 36,
+     "fp": 12,
+     "tn": 154
+    },
+    {
+     "check": "cutline",
+     "tp": 14,
+     "fn": 0,
+     "fp": 11,
+     "tn": 201
+    },
+    {
+     "check": "white-ink",
+     "tp": 14,
+     "fn": 0,
+     "fp": 8,
+     "tn": 204
+    },
+    {
+     "check": "tiny-text",
+     "tp": 12,
+     "fn": 0,
+     "fp": 0,
+     "tn": 214
+    },
+    {
+     "check": "dims-mismatch",
+     "tp": 12,
+     "fn": 0,
+     "fp": 0,
+     "tn": 214
+    },
+    {
+     "check": "rgb-black-auto-convert",
+     "tp": 12,
+     "fn": 12,
+     "fp": 0,
+     "tn": 202
+    },
+    {
+     "check": "transparency-auto-convert",
+     "tp": 12,
+     "fn": 12,
+     "fp": 0,
+     "tn": 202
+    }
+   ]
+  },
+  "L1": {
+   "n": 60,
+   "verdictCorrect": 60,
+   "exact": 60,
+   "errors": 0,
+   "verdict": {
+    "tp": 22,
+    "fn": 0,
+    "fp": 0,
+    "tn": 38
+   },
+   "checks": [
+    {
+     "check": "low-ppi",
+     "tp": 8,
+     "fn": 0,
+     "fp": 0,
+     "tn": 52
+    },
+    {
+     "check": "bleed",
+     "tp": 7,
+     "fn": 0,
+     "fp": 0,
+     "tn": 53
+    },
+    {
+     "check": "cutline",
+     "tp": 7,
+     "fn": 0,
+     "fp": 0,
+     "tn": 53
+    },
+    {
+     "check": "white-ink",
+     "tp": 0,
+     "fn": 0,
+     "fp": 0,
+     "tn": 60
+    },
+    {
+     "check": "tiny-text",
+     "tp": 0,
+     "fn": 0,
+     "fp": 0,
+     "tn": 60
+    },
+    {
+     "check": "dims-mismatch",
+     "tp": 0,
+     "fn": 0,
+     "fp": 0,
+     "tn": 60
+    },
+    {
+     "check": "rgb-black-auto-convert",
+     "tp": 0,
+     "fn": 0,
+     "fp": 0,
+     "tn": 0
+    },
+    {
+     "check": "transparency-auto-convert",
+     "tp": 0,
+     "fn": 0,
+     "fp": 0,
+     "tn": 0
+    }
+   ]
+  },
+  "L2": {
+   "n": 42,
+   "verdictCorrect": 42,
+   "exact": 42,
+   "errors": 0,
+   "verdict": {
+    "tp": 20,
+    "fn": 0,
+    "fp": 0,
+    "tn": 22
+   },
+   "checks": [
+    {
+     "check": "low-ppi",
+     "tp": 6,
+     "fn": 0,
+     "fp": 0,
+     "tn": 36
+    },
+    {
+     "check": "bleed",
+     "tp": 6,
+     "fn": 0,
+     "fp": 0,
+     "tn": 36
+    },
+    {
+     "check": "cutline",
+     "tp": 2,
+     "fn": 0,
+     "fp": 0,
+     "tn": 40
+    },
+    {
+     "check": "white-ink",
+     "tp": 7,
+     "fn": 0,
+     "fp": 0,
+     "tn": 35
+    },
+    {
+     "check": "tiny-text",
+     "tp": 3,
+     "fn": 0,
+     "fp": 0,
+     "tn": 39
+    },
+    {
+     "check": "dims-mismatch",
+     "tp": 0,
+     "fn": 0,
+     "fp": 0,
+     "tn": 42
+    },
+    {
+     "check": "rgb-black-auto-convert",
+     "tp": 4,
+     "fn": 0,
+     "fp": 0,
+     "tn": 38
+    },
+    {
+     "check": "transparency-auto-convert",
+     "tp": 4,
+     "fn": 0,
+     "fp": 0,
+     "tn": 38
+    }
+   ]
+  }
+ },
+ "misses": [
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f025-margin-bottom.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgb8",
+   "note": "margin-bottom 34px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f026-margin-bottom.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgba8",
+   "note": "margin-bottom 29px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f027-margin-bottom.png",
+   "productId": "clear",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "palette",
+   "note": "margin-bottom 5px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f028-margin-bottom.png",
+   "productId": "clear",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "gray8",
+   "note": "margin-bottom 10px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f029-margin-bottom.png",
+   "productId": "holographic",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgb16",
+   "note": "margin-bottom 14px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f030-margin-bottom.png",
+   "productId": "clear",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgb8-adam7",
+   "note": "margin-bottom 15px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f031-margin-bottom.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 1.5,
+   "orderedHeightIn": 1.5,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgb8",
+   "note": "margin-bottom 32px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f032-margin-bottom.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgba8",
+   "note": "margin-bottom 35px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f033-margin-bottom.png",
+   "productId": "holographic",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "palette",
+   "note": "margin-bottom 35px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f034-margin-bottom.png",
+   "productId": "holographic",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "gray8",
+   "note": "margin-bottom 26px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f035-margin-bottom.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 1.5,
+   "orderedHeightIn": 1.5,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgb16",
+   "note": "margin-bottom 27px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f036-margin-bottom.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-bottom",
+   "encoding": "rgb8-adam7",
+   "note": "margin-bottom 29px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f037-margin-left.png",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgb8",
+   "note": "margin-left 27px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f038-margin-left.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgba8",
+   "note": "margin-left 19px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f039-margin-left.png",
+   "productId": "clear",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "palette",
+   "note": "margin-left 29px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f040-margin-left.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "gray8",
+   "note": "margin-left 33px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f041-margin-left.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgb16",
+   "note": "margin-left 7px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f042-margin-left.png",
+   "productId": "clear",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgb8-adam7",
+   "note": "margin-left 11px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f043-margin-left.png",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgb8",
+   "note": "margin-left 19px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f044-margin-left.png",
+   "productId": "holographic",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgba8",
+   "note": "margin-left 33px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f045-margin-left.png",
+   "productId": "clear",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "palette",
+   "note": "margin-left 11px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f046-margin-left.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "gray8",
+   "note": "margin-left 17px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f047-margin-left.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgb16",
+   "note": "margin-left 38px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f048-margin-left.png",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-left",
+   "encoding": "rgb8-adam7",
+   "note": "margin-left 27px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f049-margin-right.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgb8",
+   "note": "margin-right 35px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f050-margin-right.png",
+   "productId": "clear",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgba8",
+   "note": "margin-right 7px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f051-margin-right.png",
+   "productId": "clear",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "palette",
+   "note": "margin-right 4px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f052-margin-right.png",
+   "productId": "holographic",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "gray8",
+   "note": "margin-right 26px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f053-margin-right.png",
+   "productId": "holographic",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgb16",
+   "note": "margin-right 4px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f054-margin-right.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgb8-adam7",
+   "note": "margin-right 35px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f055-margin-right.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgb8",
+   "note": "margin-right 29px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f056-margin-right.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgba8",
+   "note": "margin-right 21px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f057-margin-right.png",
+   "productId": "holographic",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "palette",
+   "note": "margin-right 7px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f058-margin-right.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "gray8",
+   "note": "margin-right 29px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f059-margin-right.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 1.5,
+   "orderedHeightIn": 1.5,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgb16",
+   "note": "margin-right 38px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f060-margin-right.png",
+   "productId": "holographic",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "bleed"
+   ],
+   "expectedWarnings": [],
+   "fault": "margin-right",
+   "encoding": "rgb8-adam7",
+   "note": "margin-right 4px",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f073-white-design-top.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgb8",
+   "note": "design with a white sky band 97px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f074-white-design-top.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgba8",
+   "note": "design with a white sky band 90px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f075-white-design-top.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "palette",
+   "note": "design with a white sky band 39px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f076-white-design-top.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 1.5,
+   "orderedHeightIn": 1.5,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "gray8",
+   "note": "design with a white sky band 61px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f077-white-design-top.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgb16",
+   "note": "design with a white sky band 237px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f078-white-design-top.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgb8-adam7",
+   "note": "design with a white sky band 155px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f079-white-design-top.png",
+   "productId": "holographic",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgb8",
+   "note": "design with a white sky band 117px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f080-white-design-top.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgba8",
+   "note": "design with a white sky band 192px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f081-white-design-top.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "palette",
+   "note": "design with a white sky band 278px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f082-white-design-top.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "gray8",
+   "note": "design with a white sky band 86px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f083-white-design-top.png",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgb16",
+   "note": "design with a white sky band 83px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f084-white-design-top.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-design-top",
+   "encoding": "rgb8-adam7",
+   "note": "design with a white sky band 130px at the top, art runs to every edge",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi",
+    "bleed"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f097-near-black.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgb8",
+   "note": "near-black block at 2,2,2",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f098-near-black.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgba8",
+   "note": "near-black block at 2,2,2",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f099-near-black.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "palette",
+   "note": "near-black block at 6,6,6",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f100-near-black.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "gray8",
+   "note": "near-black block at 6,6,6",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f101-near-black.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgb16",
+   "note": "near-black block at 2,2,2",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f102-near-black.png",
+   "productId": "clear",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgb8-adam7",
+   "note": "near-black block at 6,6,6",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f103-near-black.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgb8",
+   "note": "near-black block at 6,6,6",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f104-near-black.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgba8",
+   "note": "near-black block at 2,2,2",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f105-near-black.png",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "palette",
+   "note": "near-black block at 4,4,4",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f106-near-black.png",
+   "productId": "clear",
+   "orderedWidthIn": 1.5,
+   "orderedHeightIn": 1.5,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "gray8",
+   "note": "near-black block at 4,4,4",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f107-near-black.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgb16",
+   "note": "near-black block at 8,8,8",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f108-near-black.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "rgb-black-auto-convert"
+   ],
+   "fault": "near-black",
+   "encoding": "rgb8-adam7",
+   "note": "near-black block at 2,2,2",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f121-faint-alpha.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 254",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f122-faint-alpha.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 251",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f123-faint-alpha.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 2.5,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 254",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f124-faint-alpha.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 251",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f125-faint-alpha.png",
+   "productId": "roll-label",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgb16",
+   "note": "faint-alpha alpha 253",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f126-faint-alpha.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgb8-adam7",
+   "note": "faint-alpha alpha 251",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f127-faint-alpha.png",
+   "productId": "clear",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "low-ppi"
+   ],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 254",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "low-ppi"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f128-faint-alpha.png",
+   "productId": "die-cut",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 251",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f129-faint-alpha.png",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 251",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f130-faint-alpha.png",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgba8",
+   "note": "faint-alpha alpha 251",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f131-faint-alpha.png",
+   "productId": "holographic",
+   "orderedWidthIn": 4,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgb16",
+   "note": "faint-alpha alpha 254",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "png",
+   "file": "f132-faint-alpha.png",
+   "productId": "packaging-tape",
+   "orderedWidthIn": 2,
+   "orderedHeightIn": 2,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [
+    "transparency-auto-convert"
+   ],
+   "fault": "faint-alpha",
+   "encoding": "rgb8-adam7",
+   "note": "faint-alpha alpha 254",
+   "verdict": "PASS",
+   "fails": [],
+   "warnings": [
+    "low-ppi-warn"
+   ],
+   "verdictOk": true,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f208-pdf-cut.pdf",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "cut-name /Cut#43ontour",
+   "encoding": "plain",
+   "note": "cut-name /Cut#43ontour",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f212-pdf-white.pdf",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /White_Ink",
+   "encoding": "plain",
+   "note": "white-name /White_Ink",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f213-pdf-white.pdf",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /Spot#20White",
+   "encoding": "plain",
+   "note": "white-name /Spot#20White",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f214-pdf-white.pdf",
+   "productId": "holographic",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /RDG_WHITE",
+   "encoding": "plain",
+   "note": "white-name /RDG_WHITE",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f216-pdf-cut.pdf",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "cut-name /CutContour",
+   "encoding": "objstm",
+   "note": "cut-name /CutContour",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f217-pdf-cut.pdf",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "cut-name /Cutcontour",
+   "encoding": "objstm",
+   "note": "cut-name /Cutcontour",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f218-pdf-cut.pdf",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "cut-name /CUTCONTOUR",
+   "encoding": "objstm",
+   "note": "cut-name /CUTCONTOUR",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f219-pdf-cut.pdf",
+   "productId": "die-cut",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "cut-name /Cut#43ontour",
+   "encoding": "objstm",
+   "note": "cut-name /Cut#43ontour",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f221-pdf-white.pdf",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /White",
+   "encoding": "objstm",
+   "note": "white-name /White",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline",
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f222-pdf-white.pdf",
+   "productId": "holographic",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /WhiteInk",
+   "encoding": "objstm",
+   "note": "white-name /WhiteInk",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline",
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f223-pdf-white.pdf",
+   "productId": "holographic",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /White_Ink",
+   "encoding": "objstm",
+   "note": "white-name /White_Ink",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline",
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f224-pdf-white.pdf",
+   "productId": "holographic",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /Spot#20White",
+   "encoding": "objstm",
+   "note": "white-name /Spot#20White",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline",
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f225-pdf-white.pdf",
+   "productId": "clear",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "PASS",
+   "expectedFails": [],
+   "expectedWarnings": [],
+   "fault": "white-name /RDG_WHITE",
+   "encoding": "objstm",
+   "note": "white-name /RDG_WHITE",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline",
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": false,
+   "exact": false
+  },
+  {
+   "set": "fresh",
+   "kind": "pdf",
+   "file": "f226-pdf-white.pdf",
+   "productId": "holographic",
+   "orderedWidthIn": 3,
+   "orderedHeightIn": 3,
+   "expectedVerdict": "SOFT-FAIL",
+   "expectedFails": [
+    "white-ink"
+   ],
+   "expectedWarnings": [],
+   "fault": "white-name none",
+   "encoding": "objstm",
+   "note": "white-name none",
+   "verdict": "SOFT-FAIL",
+   "fails": [
+    "cutline",
+    "white-ink"
+   ],
+   "warnings": [],
+   "verdictOk": true,
+   "exact": false
+  }
+ ]
+}
