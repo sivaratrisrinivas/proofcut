@@ -6,11 +6,9 @@ Live: https://proofcut.vercel.app
 
 [![Watch the 30 second demo](docs/demo-poster.png)](https://github.com/sivaratrisrinivas/proofcut/blob/main/docs/demo.mp4)
 
-<video src="https://raw.githubusercontent.com/sivaratrisrinivas/proofcut/main/docs/demo.mp4" controls muted playsinline width="100%"></video>
-
-Click the image to play the video. It shows a failing sample, a passing
-sample, a PNG upload, and the eval results. The file is
-[docs/demo.mp4](docs/demo.mp4).
+Click the image to open the video player. It shows a failing sample, a
+passing sample, a PNG upload, and the eval results. Direct download:
+[docs/demo.mp4](https://raw.githubusercontent.com/sivaratrisrinivas/proofcut/main/docs/demo.mp4).
 
 | Phone | Tablet | Desktop |
 | --- | --- | --- |
