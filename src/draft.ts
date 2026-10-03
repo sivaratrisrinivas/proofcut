@@ -1,4 +1,5 @@
 import type { PreflightResult } from "./preflight";
+import { getSpec } from "./specs";
 
 export interface OverlaySpec {
   cutline: { visible: boolean; style: "dashed"; color: "magenta" };
@@ -22,6 +23,7 @@ export interface ChecklistTick {
 export function buildChecklist(r: PreflightResult): ChecklistTick[] {
   const m = r.measurements;
   const fail = new Set(r.fails);
+  const spec = getSpec(r.productId);
   return [
     {
       id: "ppi",
@@ -47,7 +49,11 @@ export function buildChecklist(r: PreflightResult): ChecklistTick[] {
       id: "cutline",
       label: "Cut line",
       ok: !fail.has("cutline"),
-      detail: m.cutlinePresent ? "CutContour path present" : "CutContour path missing",
+      detail: m.cutlinePresent
+        ? "CutContour path present"
+        : spec.cutlineRequired
+          ? "CutContour path missing"
+          : `Not required for ${spec.displayName}`,
     },
     {
       id: "color",
@@ -56,7 +62,9 @@ export function buildChecklist(r: PreflightResult): ChecklistTick[] {
       detail:
         m.colorMode === "RGB"
           ? "RGB black detected, auto-converts to CMYK"
-          : `${m.colorMode ?? "Unknown"} mode, no conversion needed`,
+          : m.colorMode
+            ? `${m.colorMode} mode, no conversion needed`
+            : "No pure RGB black found",
     },
     {
       id: "white-ink",
@@ -67,7 +75,9 @@ export function buildChecklist(r: PreflightResult): ChecklistTick[] {
           ? "White underbase present"
           : m.whiteInkPresent === false
             ? "White underbase missing"
-            : "White underbase not required",
+            : spec.whiteInkRequired
+              ? "White underbase not declared"
+              : `Not required for ${spec.displayName}`,
     },
     {
       id: "tiny-text",
@@ -76,7 +86,7 @@ export function buildChecklist(r: PreflightResult): ChecklistTick[] {
       detail:
         typeof m.minTextPt === "number"
           ? `Smallest text ${m.minTextPt}pt (minimum 6pt)`
-          : "No text under review",
+          : "No small text declared",
     },
     {
       id: "transparency",
@@ -116,7 +126,8 @@ function failLine(r: PreflightResult, code: string): string | null {
 
 export function composeMessage(r: PreflightResult): string {
   if (r.pass) {
-    return `Approved: ${Math.round(r.measurements.ppi)} PPI, bleed ${r.measurements.bleedWidthIn.toFixed(3)}in, cut line present. Ready to draft.`;
+    const cut = r.measurements.cutlinePresent ? ", cut line present" : "";
+    return `Approved: ${Math.round(r.measurements.ppi)} PPI, bleed ${r.measurements.bleedWidthIn.toFixed(3)}in${cut}. Ready to draft.`;
   }
   const lines = r.fails.map((f) => failLine(r, f)).filter((l): l is string => l !== null);
   const msg = lines.join("\n");

@@ -1,61 +1,89 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFile, readdir } from "node:fs/promises";
-import { basename, join } from "node:path";
-import { preflightDemoPng, preflightUpload, type DemoSidecar } from "../../../src/upload";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { findSample, listSamples } from "../../../src/catalog";
+import { preflightSample, preflightUpload } from "../../../src/upload";
 import { listSpecs } from "../../../src/specs";
+import { MAX_UPLOAD_BYTES } from "../../../src/limits";
 
-const ROOT = process.cwd();
-const CORPUS_DIR = join(ROOT, "corpus");
-const L2_DIR = join(ROOT, "corpus-l2-content");
+export const runtime = "nodejs";
+
 
 export async function GET() {
-  let demoFiles: string[] = [];
-  try {
-    demoFiles = (await readdir(CORPUS_DIR)).filter((f) => f.endsWith(".png")).sort().slice(0, 5);
-  } catch {
-    demoFiles = [];
-  }
-  return NextResponse.json({ products: listSpecs(), demoFiles });
+  const samples = listSamples().map((s) => ({
+    file: s.file,
+    set: s.set,
+    kind: s.kind,
+    productId: s.productId,
+    productName: s.productName,
+    orderedWidthIn: s.orderedWidthIn,
+    orderedHeightIn: s.orderedHeightIn,
+    note: s.note,
+  }));
+  return NextResponse.json(
+    { products: listSpecs(), samples, maxUploadBytes: MAX_UPLOAD_BYTES },
+    { headers: { "cache-control": "public, max-age=300" } },
+  );
 }
 
-function safeName(raw: string): string {
-  const name = basename(raw);
-  if (!/^[\w][\w.-]*\.(png|pdf)$/i.test(name)) throw new Error("unsupported demo file");
-  return name;
-}
-
-async function demoPanel(name: string, ordered: { widthIn: number; heightIn: number }, productId: string) {
-  const file = safeName(name);
-  const dir = file.toLowerCase().endsWith(".pdf") ? L2_DIR : CORPUS_DIR;
-  const resolved = join(dir, file);
-  if (!resolved.startsWith(dir)) throw new Error("unsupported demo file");
-  const bytes = await readFile(resolved);
-  const sidecar = JSON.parse(await readFile(`${resolved}.sidecar.json`, "utf8")) as DemoSidecar;
-  return preflightDemoPng(bytes, sidecar, ordered, productId);
+function bad(error: string, status = 400) {
+  return NextResponse.json({ error }, { status });
 }
 
 export async function POST(req: NextRequest) {
+  let form: FormData;
   try {
-    const form = await req.formData();
-    const widthIn = Number(form.get("widthIn"));
-    const heightIn = Number(form.get("heightIn"));
-    const productId = String(form.get("productId") ?? "");
-    if (!Number.isFinite(widthIn) || widthIn <= 0 || !Number.isFinite(heightIn) || heightIn <= 0) {
-      return NextResponse.json({ error: "ordered size must be positive numbers" }, { status: 400 });
-    }
-    if (!productId) return NextResponse.json({ error: "productId is required" }, { status: 400 });
-    const ordered = { widthIn, heightIn };
+    form = await req.formData();
+  } catch {
+    return bad("Send the file as multipart form data.");
+  }
+  const widthIn = Number(form.get("widthIn"));
+  const heightIn = Number(form.get("heightIn"));
+  const productId = String(form.get("productId") ?? "");
+  if (!Number.isFinite(widthIn) || widthIn <= 0 || !Number.isFinite(heightIn) || heightIn <= 0) {
+    return bad("Ordered width and height must be positive numbers.");
+  }
+  if (widthIn > 120 || heightIn > 120) return bad("Ordered size must be 120 inches or less per side.");
+  if (!listSpecs().some((p) => p.id === productId)) return bad("Pick a product.");
+  const ordered = { widthIn, heightIn };
 
-    const demoFile = form.get("demoFile");
-    if (typeof demoFile === "string" && demoFile.length > 0) {
-      return NextResponse.json(await demoPanel(demoFile, ordered, productId));
+  try {
+    const sampleName = form.get("demoFile");
+    if (typeof sampleName === "string" && sampleName.length > 0) {
+      const sample = findSample(sampleName);
+      if (!sample) return bad("Unknown sample file.");
+      const path = join(process.cwd(), sample.dir, sample.file);
+      const [bytes, sidecarText] = await Promise.all([readFile(path), readFile(`${path}.sidecar.json`, "utf8")]);
+      const panel = preflightSample(bytes, sample.file, JSON.parse(sidecarText), ordered, productId);
+      const sameOrder =
+        sample.productId === productId &&
+        Math.abs(sample.orderedWidthIn - widthIn) < 1e-9 &&
+        Math.abs(sample.orderedHeightIn - heightIn) < 1e-9;
+      return NextResponse.json({
+        ...panel,
+        groundTruth: {
+          expectedVerdict: sample.expectedVerdict,
+          expectedFails: sample.expectedFails,
+          sameOrder,
+          matches:
+            sameOrder &&
+            panel.result?.verdict === sample.expectedVerdict &&
+            [...(panel.result?.fails ?? [])].sort().join(",") === [...sample.expectedFails].sort().join(","),
+        },
+      });
     }
+
     const file = form.get("file");
-    if (!(file instanceof File)) return NextResponse.json({ error: "file is required" }, { status: 400 });
-    const panel = preflightUpload(new Uint8Array(await file.arrayBuffer()), file.name, ordered, productId);
-    return NextResponse.json(panel);
+    if (!(file instanceof File)) return bad("Choose a PNG or PDF file, or pick a sample.");
+    if (file.size === 0) return bad("That file is empty.");
+    if (file.size > MAX_UPLOAD_BYTES) return bad("Files over 4.5 MB do not fit the host limit. Export a smaller PNG.", 413);
+    if (!/\.(png|pdf)$/i.test(file.name)) return bad("Only PNG and PDF files are supported.");
+    return NextResponse.json(preflightUpload(new Uint8Array(await file.arrayBuffer()), file.name, ordered, productId));
   } catch (err) {
     const message = err instanceof Error ? err.message : "preflight failed";
-    return NextResponse.json({ error: message }, { status: 400 });
+    const friendly = /^not a png|^unsupported upload/.test(message)
+      ? `This file could not be read (${message}).`
+      : message;
+    return bad(friendly, 422);
   }
 }

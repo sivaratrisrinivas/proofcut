@@ -1,23 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { findSample } from "../../../src/catalog";
 
-const ROOT = process.cwd();
-const CORPUS_DIR = join(ROOT, "corpus");
+export const runtime = "nodejs";
 
 export async function GET(req: NextRequest) {
+  const name = req.nextUrl.searchParams.get("name") ?? "";
+  const sample = findSample(name);
+  if (!sample || sample.kind !== "png") {
+    return NextResponse.json({ error: "unsupported demo file" }, { status: 400 });
+  }
   try {
-    const name = req.nextUrl.searchParams.get("name") ?? "";
-    if (!/^[\w][\w.-]*\.png$/i.test(name)) {
-      return NextResponse.json({ error: "unsupported demo file" }, { status: 400 });
-    }
-    const resolved = join(CORPUS_DIR, name);
-    if (!resolved.startsWith(CORPUS_DIR)) {
-      return NextResponse.json({ error: "unsupported demo file" }, { status: 400 });
-    }
-    const bytes = await readFile(resolved);
+    const bytes = await readFile(join(process.cwd(), sample.dir, sample.file));
     return new NextResponse(new Uint8Array(bytes), {
-      headers: { "content-type": "image/png", "cache-control": "public, max-age=3600" },
+      headers: { "content-type": "image/png", "cache-control": "public, max-age=86400, immutable" },
     });
   } catch {
     return NextResponse.json({ error: "demo file not found" }, { status: 404 });
